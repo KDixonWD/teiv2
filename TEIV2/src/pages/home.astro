@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const services = [
+  { title: 'Domestic Electrical', excerpt: 'Installations, repairs and inspections.' },
+  { title: 'Commercial Electrical', excerpt: 'Fit-outs, maintenance and compliance.' },
+  { title: 'Renewables', excerpt: 'Solar PV and battery systems.' },
+];
+---
+<BaseLayout title="Home">
+  <Hero title="TEI Electrical" subtitle="Trusted electricians for domestic and commercial customers." />
+
+  <section class="services wrap">
+    <h2>Our Services</h2>
+    <div class="grid">
+      {services.map(s => <ServiceCard title={s.title} excerpt={s.excerpt} />)}
+    </div>
+  </section>
+
+  <section class="contact wrap">
+    <h2>Get in touch</h2>
+    <ContactForm />
+  </section>
+</BaseLayout>

@@ -1,0 +1,242 @@
+/* Global styles and brand tokens for TEI Electrical */
+:root {
+    /* Brand palette */
+    --brand-dark: #606061;
+    /* logo background */
+    --brand-yellow: #FDEE21;
+    /* logo text */
+    --brand-green: #2A9134;
+    /* primary green */
+    --brand-green-deep: #054A29;
+    /* deep green accent */
+    --brand-black: #0D0D0E;
+    /* near-black */
+
+    /* Neutral scale */
+    --bg: #ffffff;
+    --surface: #fbfbfb;
+    --muted: #6b6b6b;
+    --text: #111111;
+
+    /* Layout */
+    --container-width: 1100px;
+    --gap: 1rem;
+}
+
+/* Reset / base */
+* {
+    box-sizing: border-box
+}
+
+html,
+body,
+#app {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased
+}
+
+/* Container */
+.wrap {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 2rem
+}
+
+/* Header */
+.site-header {
+    background: var(--surface);
+    border-bottom: 1px solid #e6e6e6
+}
+
+.site-header .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap)
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    text-decoration: none;
+    color: var(--brand-yellow);
+    background: var(--brand-dark);
+    padding: .35rem .5rem;
+    border-radius: 4px;
+    font-weight: 700
+}
+
+/* simple nav */
+nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center
+}
+
+nav a {
+    color: var(--brand-black);
+    text-decoration: none;
+    padding: .25rem .35rem;
+    border-radius: 4px
+}
+
+nav a:hover {
+    background: rgba(0, 0, 0, 0.03)
+}
+
+/* Hero */
+.hero {
+    background: linear-gradient(180deg, var(--brand-green)10%, rgba(42, 145, 52, 0.05)100%);
+    padding: 3.5rem 0;
+    color: var(--brand-dark)
+}
+
+.hero .wrap {
+    display: block
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: var(--brand-dark)
+}
+
+.hero .sub {
+    margin-top: .5rem;
+    color: var(--muted)
+}
+
+/* Grid / cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem
+}
+
+.service-card {
+    padding: 1.25rem;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #fff, #fbfbfb);
+    border: 1px solid #ececec;
+    box-shadow: 0 1px 0 rgba(10, 10, 10, 0.02)
+}
+
+.service-card h3 {
+    margin: .2rem 0 .5rem;
+    color: var(--brand-green-deep)
+}
+
+.service-card p {
+    margin: 0;
+    color: var(--muted)
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: .6rem 1rem;
+    border-radius: 6px;
+    border: none;
+    text-decoration: none;
+    color: #fff;
+    background: var(--brand-green);
+    cursor: pointer
+}
+
+.btn--secondary {
+    background: var(--brand-dark);
+    color: var(--brand-yellow)
+}
+
+/* Forms */
+.contact-form label {
+    display: block;
+    margin-bottom: .75rem;
+    color: var(--brand-black)
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: .6rem;
+    border: 1px solid #d6d6d6;
+    border-radius: 6px;
+    font-family: inherit
+}
+
+textarea {
+    min-height: 140px
+}
+
+/* Footer */
+.site-footer {
+    border-top: 1px solid #e6e6e6;
+    padding: 1.25rem 0;
+    margin-top: 3rem;
+    color: var(--muted)
+}
+
+.site-footer nav {
+    display: flex;
+    gap: 1rem
+}
+
+/* Utilities */
+.muted {
+    color: var(--muted)
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0
+}
+
+/* Responsive tweaks */
+@media (max-width:720px) {
+    .wrap {
+        padding: 1rem
+    }
+
+    .site-header .wrap {
+        flex-direction: column;
+        align-items: flex-start
+    }
+
+    nav {
+        flex-wrap: wrap
+    }
+
+    .hero h1 {
+        font-size: 1.5rem
+    }
+}
+
+/* Small helpers for brand usage */
+.brand-badge {
+    background: var(--brand-dark);
+    color: var(--brand-yellow);
+    padding: .15rem .4rem;
+    border-radius: 4px;
+    font-weight: 700
+}
+
+.accent-text {
+    color: var(--brand-green)
+}
