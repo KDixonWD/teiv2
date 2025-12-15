@@ -27,16 +27,18 @@ const {
     {members.map(member => (
       <article class="card" role="group" aria-label={member.name}>
         <div class="card-inner">
-          <div class="card-media">
-            <img src={member.imageUrl} alt={member.imageAlt ?? member.name} />
-          </div>
+          
           <div class="card-content">
-            <div class="card-name-section">
-              <h3 class="card-name">{member.name}</h3>
-            </div>
+            
             <div class="card-role-section">
               <p class="card-role">{member.role}</p>
             </div>
+            <div class="card-name-section">
+              <h3 class="card-name">{member.name}</h3>
+            </div>
+            <div class="card-media">
+            <img src={member.imageUrl} alt={member.imageAlt ?? member.name} />
+          </div>
           </div>
         </div>
       </article>
@@ -45,7 +47,7 @@ const {
 </div>
 
 <style>
-  .team-cards { padding: 2.5rem 0 3rem; }
+  .team-cards { padding: 0.5rem 0 3rem; }
 
   .cards {
     display: grid;
@@ -77,11 +79,11 @@ const {
   }
 
   .card-media img {
-    width: 140px;
-    height: 140px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     object-fit: cover;
-    border: 8px solid var(--brand-green);
+    border: 8px solid var(--brand-yellow);
     box-shadow: 0 14px 36px rgba(42,145,52,0.10);
     background: white;
     display: block;
@@ -90,8 +92,7 @@ const {
   .card-content {
     display: grid;
     grid-template-rows: auto auto;
-    min-height: 140px;
-    padding-left: calc(140px + 40px); /* leave space for avatar */
+    min-height: 160px;
   }
 
   .card-name-section {
@@ -100,6 +101,8 @@ const {
     align-items: center;
     padding: 1.25rem 1.25rem;
     z-index: 1;
+        padding-left: calc(160px + 40px); /* leave space for avatar */
+
   }
 
   .card-role-section {
@@ -108,10 +111,12 @@ const {
     align-items: center;
     padding: 1.25rem 1.25rem;
     color: var(--color-bg);
+       padding-left: calc(160px + 40px); /* leave space for avatar */
+
   }
 
-  .card-name { margin: 0; font-weight: 900; color: var(--brand-dark); font-size: 1.2rem; }
-  .card-role { margin: 0; color: var(--color-bg); font-size: 1rem; }
+  .card-name { margin: 0; font-weight: 900; color: var(--brand-dark); font-size: 1.4rem; }
+  .card-role { margin: 0; color: var(--color-bg); font-size: 1.2rem; }
 
   .card:hover { transform: translateY(-4px); }
 

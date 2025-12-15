@@ -1,0 +1,359 @@
+---
+import logoUrl from '../../../assets/global/TEI_logo.png';
+---
+
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="nav-header">
+    <img src={logoUrl.src} alt="TEI Electrical Logo" class="mobile-logo" />
+    <button class="close-btn" id="closeMenu" aria-label="Close menu">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="quote-section">
+    <h2 class="quote-title">Expert Service Every Time</h2>
+    <a href="/quote" class="quote-btn">
+      <i class="fas fa-bolt"></i>
+      <span>Get Your Free Quote</span>
+      <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+
+  <nav>
+    <ul class="nav-links">
+      <li><a href="/teiv2/home">Home</a></li>
+      <li class="divider"></li>
+      <li><a href="/teiv2/services">Services</a></li>
+      <li class="divider"></li>
+      <li><a href="/teiv2/about-us">About</a></li>
+      <li class="divider"></li>
+      <li><a href="/teiv2/contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="contact-section">
+    <a href="tel:01723449667" class="contact-item contact-link">
+      <i class="fas fa-phone"></i>
+      <span>01723 449667</span>
+    </a>
+    <a href="mailto:info@tei-ltd.co.uk" class="contact-item contact-link">
+      <i class="fas fa-envelope"></i>
+      <span>info@tei-ltd.co.uk</span>
+    </a>
+    <a href="/emergency" class="emergency-btn">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span>24/7 Emergency Service</span>
+    </a>
+  </div>
+
+  <div class="social-section">
+    <a href="#" class="social-btn">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="#" class="social-btn">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+    <a href="#" class="social-btn">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.yell.com/biz/them-electrical-installations-ltd-filey-10772044/" 
+       target="_blank" 
+       rel="noopener" 
+       class="yell-btn">
+      <img src="/Yell-Reviews-Logo.png" alt="Yell Reviews" class="yell-logo" />
+    </a>
+  </div>
+</div>
+
+<style>
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    height: 100vh;
+    background: var(--color-contrast);
+    z-index: 1000;
+    padding: 2rem;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 
+      -5px 0 15px rgba(0, 0, 0, 0.2),
+      -1px 0 5px rgba(0, 0, 0, 0.1);
+    border-left: 2px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .mobile-nav.active {
+    right: 0;
+  }
+
+  .nav-header {
+    margin: -2rem -2rem 0;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-logo {
+    height: 4rem;
+    width: auto;
+  }
+
+  .close-btn {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--color-bg);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-btn:hover {
+    color: var(--color-accent);
+  }
+
+  .quote-section {
+    background: linear-gradient(to bottom, var(--brand-green-deep), var(--brand-green));
+    margin: 0 -2rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .quote-title {
+    color: var(--color-bg);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .quote-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent);
+    color: var(--color-contrast);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    gap: 0.75rem;
+  }
+
+  .quote-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    transform: translateY(-2px);
+  }
+
+  .quote-btn i {
+    font-size: 1.2rem;
+  }
+
+  .nav-links {
+    margin-top: 1rem;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .nav-links li a {
+    color: var(--color-bg);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    display: block;
+    padding: 0.5rem 0;
+  }
+
+  .nav-links li a:hover {
+    color: var(--color-accent);
+  }
+
+  .divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0.5rem 0;
+  }
+
+  .contact-section {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .contact-link {
+    text-decoration: none;
+    color: var(--color-bg);
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .contact-link:hover {
+    color: var(--color-accent);
+    transform: translateX(5px);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .contact-item i {
+    margin-right: 1rem;
+    color: var(--color-accent);
+    width: 1.5rem;
+  }
+
+  .emergency-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent);
+    color: var(--color-contrast);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .emergency-btn i {
+    margin-right: 0.75rem;
+  }
+
+  .emergency-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    transform: translateY(-2px);
+  }
+
+  .social-section {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    align-items: center;
+  }
+
+  .social-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--color-accent);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: all 0.2s ease;
+  }
+
+  .social-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    transform: translateY(-2px);
+  }
+
+  .yell-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+
+  .yell-btn:hover {
+    background: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .yell-logo {
+    height: 2rem;
+    width: auto;
+  }
+
+  @media (max-width: 380px) {
+    .quote-title {
+      font-size: 1.25rem;
+    }
+
+    .quote-btn {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.25rem;
+    }
+
+    .nav-links li a {
+      font-size: 1.25rem;
+    }
+
+    .contact-item {
+      font-size: 0.95rem;
+    }
+
+    .emergency-btn {
+      font-size: 0.9rem;
+      padding: 0.6rem 0.85rem;
+    }
+
+    .icon {
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    .social-btn .icon {
+      width: 1.3rem;
+      height: 1.3rem;
+    }
+  }
+</style>
+
+<script>
+  const mobileNav = document.getElementById('mobileNav');
+  const closeMenuBtn = document.getElementById('closeMenu');
+
+  closeMenuBtn?.addEventListener('click', () => {
+    mobileNav?.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    mobileNav?.setAttribute('aria-hidden','true');
+  });
+
+  // close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNav?.classList.contains('active')) {
+      mobileNav.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      mobileNav?.setAttribute('aria-hidden','true');
+    }
+  });
+
+  // clicking outside the inner panel closes the nav
+  mobileNav?.addEventListener('click', (e) => {
+    if (e.target === mobileNav) {
+      mobileNav.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      mobileNav?.setAttribute('aria-hidden','true');
+    }
+  });
+</script>

@@ -25,6 +25,8 @@
     --color-bg: #ffffff;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+
 /* Base reset */
 * {
     box-sizing: border-box
@@ -32,7 +34,7 @@
 
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     line-height: 1.45;
     color: var(--color-text);
     background: var(--color-bg)
