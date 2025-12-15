@@ -1,0 +1,76 @@
+---
+// Import SVG as a URL so Vite serves it from the dev server
+import lightningBorder from '../assets/global/lightning-border.svg?url';
+interface Props {
+  class?: string;
+  theme?: 'light' | 'dark';
+  lightningPathcolour?: string;
+}
+const { class: className, theme = 'light', lightningPathcolour } = Astro.props as Props;
+
+---
+
+<div class={`section-wrapper ${theme} ${className ?? ''}`}>
+  <div class="section-content">
+    <slot />
+  </div>
+  <svg
+    class="lightning-path"
+    viewBox="0 0 1280 100"
+    preserveAspectRatio="none"
+    {...(lightningPathcolour ? { style: `color: ${lightningPathcolour};` } : {})}
+  >
+    <path
+      fill="currentColor"
+      d="M 1279.9531 11.199219 L 1160.6777 4 L 1177.7578 26 L 733.72461 4 L 750.79688 26 L 306.76367 4 L 323.8457 26 L 0.26757812 8.8339844 L 0.26757812 51.164062 L 1279.9531 51.164062 L 1279.9531 11.199219 z "
+    />
+  </svg>
+  <img src={lightningBorder} class="lightning-border" alt="" />
+</div>
+
+<style>
+  .section-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 0;
+  }
+  .light {
+    background-color: var(--color-bg);
+  }
+  .dark {
+    background-color: var(--brand-dark);
+  }
+  .section-content {
+    padding-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .lightning-path {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    pointer-events: none;
+    z-index: 1;
+    color: var(--brand-dark);
+    margin-bottom: -50px;
+  }
+
+  .dark .lightning-path {
+    color: var(--color-bg);
+  }
+
+  .lightning-border {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    pointer-events: none;
+    z-index: 2;
+    margin-bottom: -50px;
+  }
+ 
+</style>

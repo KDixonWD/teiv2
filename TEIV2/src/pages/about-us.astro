@@ -1,9 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ImageBlock from '../components/ImageBlock.astro';
+import Section from '../components/Section.astro';
+import TeamCards from '../components/TeamCards.astro';
+
+const aboutText = `THEM Electrical Installations Ltd was founded in 2018. We are a trusted electrical service provider based in North Yorkshire, operating from Hunmanby and Whitby. Led by Director Harry Phillips and supported by Emma Phillips, our Office Manager, we aim to meet your specific needs.
+
+We offer high quality electrical services for domestic, commercial and industrial properties, as well as specialised solar installations. With over 25 years of combined experience, our team delivers tailored solutions, providing expert advice and product options to bring your projects to life. As our testimonials show, we are known for our punctuality, high standard of work and excellent customer service. We ensure efficient, cost effective results for our many satisfied customers.`;
 ---
 <BaseLayout title="About Us">
   <section class="wrap">
     <h1>About Us</h1>
     <p>Company history, mission and team information.</p>
   </section>
+
+  <ImageBlock
+    imageUrl="/images/about-us/Content_image_1.webp"
+    imageAlt="THEM Electrical Installations team"
+    position="left"
+    theme="light"
+    title="Who We Are"
+    text={aboutText}
+    buttonText="Get A Quote"
+    buttonLink="/contact"
+  />
+  <Section class="dark" theme="dark" lightningPathcolour="var(--color-bg)">
+    <div class="wrap">
+      <TeamCards />
+    </div>
+  </Section>
+
 </BaseLayout>
