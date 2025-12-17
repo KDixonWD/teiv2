@@ -150,23 +150,6 @@ select {
     opacity: .8
 }
 
-/* simple nav */
-nav {
-    display: flex;
-    gap: 1rem;
-    align-items: center
-}
-
-nav a {
-    color: var(--brand-black);
-    text-decoration: none;
-    padding: .25rem .35rem;
-    border-radius: 4px
-}
-
-nav a:hover {
-    background: rgba(0, 0, 0, 0.03)
-}
 
 /* Hero */
 .hero {
