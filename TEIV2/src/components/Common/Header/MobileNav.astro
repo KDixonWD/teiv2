@@ -1,360 +1,506 @@
 ---
 import logoUrl from '../../../assets/global/TEI_logo.png';
 import yellLogoUrl from '../../../assets/global/Yell-Reviews-Logo.png';
+
+import CloseIcon from '../../../assets/icons/close.svg';
+import BoltIcon from '../../../assets/icons/bolt.svg';
+import ArrowRightIcon from '../../../assets/icons/arrow-right.svg';
+import PhoneIcon from '../../../assets/icons/phone.svg';
+import EmailIcon from '../../../assets/icons/email.svg';
+import EmergencyIcon from '../../../assets/icons/emergency.svg';
+import FacebookIcon from '../../../assets/icons/facebook.svg';
+import LinkedinIcon from '../../../assets/icons/linkedin.svg';
+import InstagramIcon from '../../../assets/icons/instagram.svg';
 ---
 
 <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="full-divider" aria-hidden="true"></div>
+
   <div class="nav-header">
     <img src={logoUrl.src} alt="TEI Electrical Logo" class="mobile-logo" />
+
     <button class="close-btn" id="closeMenu" aria-label="Close menu">
-      <i class="fas fa-times"></i>
+      <CloseIcon class="icon icon--lg" />
     </button>
   </div>
 
-  <div class="quote-section">
-    <h2 class="quote-title">Expert Service Every Time</h2>
-    <a href="/quote" class="quote-btn">
-      <i class="fas fa-bolt"></i>
-      <span>Get Your Free Quote</span>
-      <i class="fas fa-arrow-right"></i>
+  <div class="full-divider" aria-hidden="true"></div>
+
+  <div class="cta">
+    <p class="cta-kicker">Need an electrician?</p>
+    <h2 class="cta-title">Get a free quote</h2>
+    <p class="cta-text">
+      Domestic, commercial and renewables. Clear pricing and reliable call-outs.
+    </p>
+
+    <a href="/quote" class="cta-btn" data-close-mobile-nav>
+      <span class="cta-btn-left">
+        <BoltIcon class="icon icon--md" />
+        <span>Request a quote</span>
+      </span>
+      <ArrowRightIcon class="icon icon--md" />
     </a>
   </div>
 
-  <nav>
-    <ul class="nav-links">
-      <li><a href="/teiv2/home">Home</a></li>
+  <nav class="nav" aria-label="Mobile navigation">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a class="nav-link" href="/teiv2/home" data-close-mobile-nav>Home</a>
+      </li>
+
       <li class="divider"></li>
-      <li><a href="/teiv2/services">Services</a></li>
+
+      <li class="nav-item">
+        <details class="nav-accordion">
+          <summary class="nav-summary">
+            <span>Services</span>
+            <span class="caret" aria-hidden="true">▾</span>
+          </summary>
+
+          <div class="nav-sub">
+            <a class="nav-sublink" href="/teiv2/services" data-close-mobile-nav>All Services</a>
+            <a class="nav-sublink" href="/teiv2/services/commercial" data-close-mobile-nav>Commercial</a>
+            <a class="nav-sublink" href="/teiv2/services/renewable" data-close-mobile-nav>Renewable</a>
+            <a class="nav-sublink" href="/teiv2/services/domestic" data-close-mobile-nav>Domestic</a>
+          </div>
+        </details>
+      </li>
+
       <li class="divider"></li>
-      <li><a href="/teiv2/about-us">About</a></li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/teiv2/portfolio" data-close-mobile-nav>Portfolio</a>
+      </li>
+
       <li class="divider"></li>
-      <li><a href="/teiv2/contact">Contact</a></li>
+
+      <li class="nav-item">
+        <details class="nav-accordion">
+          <summary class="nav-summary">
+            <span>About</span>
+            <span class="caret" aria-hidden="true">▾</span>
+          </summary>
+
+          <div class="nav-sub">
+            <a class="nav-sublink" href="/teiv2/about-us" data-close-mobile-nav>About Us</a>
+            <a class="nav-sublink" href="/teiv2/about-us/accreditations" data-close-mobile-nav>
+              Accreditations &amp; Certifications
+            </a>
+          </div>
+        </details>
+      </li>
+
+      <li class="divider"></li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/teiv2/contact" data-close-mobile-nav>Contact</a>
+      </li>
     </ul>
   </nav>
 
-  <div class="contact-section">
-    <a href="tel:01723449667" class="contact-item contact-link">
-      <i class="fas fa-phone"></i>
+  <div class="contact">
+    <a href="tel:01723449667" class="contact-item" data-close-mobile-nav>
+      <PhoneIcon class="icon icon--md icon--accent" />
       <span>01723 449667</span>
     </a>
-    <a href="mailto:info@tei-ltd.co.uk" class="contact-item contact-link">
-      <i class="fas fa-envelope"></i>
+
+    <a href="mailto:info@tei-ltd.co.uk" class="contact-item" data-close-mobile-nav>
+      <EmailIcon class="icon icon--md icon--accent" />
       <span>info@tei-ltd.co.uk</span>
     </a>
-    <a href="/emergency" class="emergency-btn">
-      <i class="fas fa-exclamation-triangle"></i>
+
+    <a href="/emergency" class="emergency-btn" data-close-mobile-nav>
+      <EmergencyIcon class="icon icon--md" />
       <span>24/7 Emergency Service</span>
     </a>
   </div>
 
-  <div class="social-section">
-    <a href="#" class="social-btn">
-      <i class="fab fa-facebook-f"></i>
+  <div class="full-divider" aria-hidden="true"></div>
+
+  <div class="social">
+    <a href="#" class="social-btn" aria-label="Facebook">
+      <FacebookIcon class="icon icon--md" />
     </a>
-    <a href="#" class="social-btn">
-      <i class="fab fa-linkedin-in"></i>
+    <a href="#" class="social-btn" aria-label="LinkedIn">
+      <LinkedinIcon class="icon icon--md" />
     </a>
-    <a href="#" class="social-btn">
-      <i class="fab fa-instagram"></i>
+    <a href="#" class="social-btn" aria-label="Instagram">
+      <InstagramIcon class="icon icon--md" />
     </a>
-    <a href="https://www.yell.com/biz/them-electrical-installations-ltd-filey-10772044/" 
-       target="_blank" 
-       rel="noopener" 
-       class="yell-btn">
+
+    <a
+      href="https://www.yell.com/biz/them-electrical-installations-ltd-filey-10772044/"
+      target="_blank"
+      rel="noopener"
+      class="yell-btn"
+      aria-label="Yell reviews"
+    >
       <img src={yellLogoUrl.src} alt="Yell Reviews" class="yell-logo" />
     </a>
   </div>
+
+  <div class="full-divider" aria-hidden="true"></div>
 </div>
 
 <style>
-  .mobile-nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    height: 100vh;
-    background: var(--color-contrast);
-    z-index: 1000;
-    padding: 2rem;
-    transition: right 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 
-      -5px 0 15px rgba(0, 0, 0, 0.2),
-      -1px 0 5px rgba(0, 0, 0, 0.1);
-    border-left: 2px solid rgba(255, 255, 255, 0.05);
-  }
+/* Panel */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: min(420px, 86vw);
+  height: 100vh;
 
-  .mobile-nav.active {
-    right: 0;
-  }
+  /* Solid background */
+  background: rgb(62, 62, 62);
 
-  .nav-header {
-    margin: -2rem -2rem 0;
-    padding: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
 
-  .mobile-logo {
-    height: 4rem;
-    width: auto;
-  }
+  border-left: 2px solid rgba(255, 255, 255, 0.06);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.35);
 
-  .close-btn {
-    position: absolute;
-    right: 1rem;
-    background: none;
-    border: none;
-    color: var(--color-bg);
-    font-size: 2rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  padding: 1.1rem;
 
-  .close-btn:hover {
-    color: var(--color-accent);
-  }
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
-  .quote-section {
-    background: linear-gradient(to bottom, var(--brand-green-deep), var(--brand-green));
-    margin: 0 -2rem;
-    padding: 1.5rem;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
+.mobile-nav.active {
+  right: 0;
+}
 
-  .quote-title {
-    color: var(--color-bg);
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
+/* Icon normalisation */
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+  flex: 0 0 auto;
+}
 
-  .quote-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-accent);
-    color: var(--color-contrast);
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: bold;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    gap: 0.75rem;
-  }
+.icon--md {
+  width: 1.4rem;
+  height: 1.4rem;
+}
 
-  .quote-btn:hover {
-    background: var(--color-primary);
-    color: var(--color-bg);
-    transform: translateY(-2px);
-  }
+.icon--lg {
+  width: 1.9rem;
+  height: 1.9rem;
+}
 
-  .quote-btn i {
-    font-size: 1.2rem;
-  }
+.icon--accent {
+  color: var(--color-accent);
+}
 
-  .nav-links {
-    margin-top: 1rem;
-    list-style: none;
-    padding: 0;
-    margin-bottom: 1.5rem;
-  }
+/* Green divider with controlled spacing */
+.full-divider {
+  padding: 0.45rem 0;      /* dark grey space above and below the line */
+  margin: 0 -1.1rem;       /* bleed to full width based on container padding */
+  background: rgb(62, 62, 62);
+}
 
-  .nav-links li a {
-    color: var(--color-bg);
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 500;
-    transition: color 0.2s ease;
-    display: block;
-    padding: 0.5rem 0;
-  }
+.full-divider::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: var(--color-primary);
+}
 
-  .nav-links li a:hover {
-    color: var(--color-accent);
-  }
+/* Header */
+.nav-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  .divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 0.5rem 0;
-  }
+  background: rgb(62, 62, 62);
+  padding: 0.65rem 0 0.85rem;
+}
 
-  .contact-section {
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
+.mobile-logo {
+  height: 3.9rem;
+  width: auto;
+  display: block;
+}
 
-  .contact-link {
-    text-decoration: none;
-    color: var(--color-bg);
-    font-weight: 600;
-    transition: all 0.2s ease;
-  }
+.close-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 
-  .contact-link:hover {
-    color: var(--color-accent);
-    transform: translateX(5px);
-  }
+  background: none;
+  border: none;
+  padding: 0.45rem;
+  cursor: pointer;
+  color: var(--color-bg);
+}
 
-  .contact-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-  }
+/* CTA */
+.cta {
+  margin: 0.85rem 0 1.1rem;
+  padding: 1.1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid var(--color-accent);
+}
 
-  .contact-item i {
-    margin-right: 1rem;
-    color: var(--color-accent);
-    width: 1.5rem;
-  }
+.cta-kicker {
+  margin: 0 0 0.25rem;
+  color: var(--color-accent);
+  font-weight: 800;
+  font-size: 0.95rem;
+}
 
-  .emergency-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-accent);
-    color: var(--color-contrast);
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: bold;
-    margin-top: 1rem;
-    transition: all 0.2s ease;
-    text-decoration: none;
-  }
+.cta-title {
+  margin: 0 0 0.35rem;
+  color: var(--color-bg);
+  font-weight: 900;
+  font-size: 1.5rem;
+}
 
-  .emergency-btn i {
-    margin-right: 0.75rem;
-  }
+.cta-text {
+  margin: 0 0 0.9rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.35;
+}
 
-  .emergency-btn:hover {
-    background: var(--color-primary);
-    color: var(--color-bg);
-    transform: translateY(-2px);
-  }
+.cta-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 
-  .social-section {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    align-items: center;
-  }
+  background: var(--color-accent);
+  color: var(--color-contrast);
+  text-decoration: none;
 
-  .social-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: var(--color-accent);
-    width: 3rem;
-    height: 3rem;
-    border-radius: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-    transition: all 0.2s ease;
-  }
+  border-radius: 12px;
+  padding: 0.85rem 0.95rem;
+  font-weight: 900;
+}
 
-  .social-btn:hover {
-    background: var(--color-primary);
-    color: var(--color-bg);
-    transform: translateY(-2px);
-  }
+.cta-btn-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
 
-  .yell-btn {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 0.75rem;
-    padding: 0.5rem 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease;
-  }
+/* Nav */
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-  .yell-btn:hover {
-    background: var(--color-primary);
-    transform: translateY(-2px);
-  }
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0.85rem 0;
+}
 
-  .yell-logo {
-    height: 2rem;
-    width: auto;
-  }
+.nav-link {
+  display: block;
+  padding: 0.35rem 0;
+  color: var(--color-bg);
+  text-decoration: none;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
 
-  @media (max-width: 380px) {
-    .quote-title {
-      font-size: 1.25rem;
-    }
+.nav-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0;
+  color: var(--color-bg);
+  font-size: 1.35rem;
+  font-weight: 900;
+  cursor: pointer;
+}
 
-    .quote-btn {
-      font-size: 0.9rem;
-      padding: 0.6rem 1.25rem;
-    }
+.nav-summary::-webkit-details-marker {
+  display: none;
+}
 
-    .nav-links li a {
-      font-size: 1.25rem;
-    }
+.caret {
+  color: var(--color-accent);
+}
 
-    .contact-item {
-      font-size: 0.95rem;
-    }
+.nav-sub {
+  margin-top: 0.6rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 2px solid var(--color-accent);
+}
 
-    .emergency-btn {
-      font-size: 0.9rem;
-      padding: 0.6rem 0.85rem;
-    }
+.nav-sublink {
+  display: block;
+  padding: 0.55rem 0;
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  font-size: 1.08rem;
+  font-weight: 700;
+}
 
-    .icon {
-      width: 1.1rem;
-      height: 1.1rem;
-    }
+.nav-sublink:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
 
-    .social-btn .icon {
-      width: 1.3rem;
-      height: 1.3rem;
-    }
-  }
+/* Contact (polished) */
+.contact {
+  margin-top: 1.1rem;
+  padding: 0.9rem 0 0.2rem;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  text-decoration: none;
+  color: var(--color-bg);
+  font-weight: 800;
+  font-size: 1.05rem;
+
+  padding: 0.75rem 0.85rem;
+  border-radius: 12px;
+}
+
+.contact-item + .contact-item {
+  margin-top: 0.35rem;
+}
+
+.contact-item:not(:last-of-type) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-item .icon {
+  color: var(--color-accent);
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 auto;
+  opacity: 0.95;
+}
+
+.contact-item span {
+  display: block;
+  line-height: 1.15;
+}
+
+.emergency-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+
+  width: calc(100% - 1.7rem);
+  margin: 0.85rem auto 0.75rem;
+
+  background: var(--color-accent);
+  color: var(--color-contrast);
+
+  padding: 0.9rem 0.95rem;
+  border-radius: 12px;
+
+  font-weight: 950;
+  text-decoration: none;
+}
+
+/* Social (polished) */
+.social {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+
+  padding: 0.85rem 0.2rem 0.45rem;
+}
+
+.social-btn {
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.social-btn .icon {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.yell-btn {
+  flex: 1;
+  min-height: 3.1rem;
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  padding: 0.6rem 0.9rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+}
+
+.yell-logo {
+  height: 1.9rem;
+  width: auto;
+  display: block;
+}
 </style>
 
 <script>
   const mobileNav = document.getElementById('mobileNav');
   const closeMenuBtn = document.getElementById('closeMenu');
 
-  closeMenuBtn?.addEventListener('click', () => {
+  const closeMobileNav = () => {
     mobileNav?.classList.remove('active');
     document.body.style.overflow = 'auto';
-    mobileNav?.setAttribute('aria-hidden','true');
-  });
+    mobileNav?.setAttribute('aria-hidden', 'true');
+  };
 
-  // close on Escape
+  closeMenuBtn?.addEventListener('click', closeMobileNav);
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileNav?.classList.contains('active')) {
-      mobileNav.classList.remove('active');
-      document.body.style.overflow = 'auto';
-      mobileNav?.setAttribute('aria-hidden','true');
+      closeMobileNav();
     }
   });
 
-  // clicking outside the inner panel closes the nav
   mobileNav?.addEventListener('click', (e) => {
-    if (e.target === mobileNav) {
-      mobileNav.classList.remove('active');
-      document.body.style.overflow = 'auto';
-      mobileNav?.setAttribute('aria-hidden','true');
+    const target = e.target;
+    if (target instanceof HTMLElement && target.closest('[data-close-mobile-nav]')) {
+      closeMobileNav();
     }
+  });
+
+  const accordions = document.querySelectorAll<HTMLDetailsElement>('.nav-accordion');
+  accordions.forEach((acc) => {
+    acc.addEventListener('toggle', () => {
+      if (acc.open) {
+        accordions.forEach((other) => {
+          if (other !== acc) other.removeAttribute('open');
+        });
+      }
+    });
   });
 </script>
