@@ -1,9 +1,211 @@
 ---
-const { title = '', subtitle = '' } = Astro.props;
+import { Image } from 'astro:assets';
+import Section from './Section.astro';
+
+import slide1 from '../assets/hero-carousel/slide1.jpg';
+import slide2 from '../assets/hero-carousel/slide2.jpg';
+import slide3 from '../assets/hero-carousel/slide3.jpg';
+
+const slides = [
+  {
+    image: slide1,
+    alt: 'Solar Panel Installation',
+    text: 'Solar Panel & Battery Storage Solutions',
+    buttonText: 'Learn More',
+    buttonLink: '/services/solar',
+  },
+  {
+    image: slide2,
+    alt: 'EV Charging Point',
+    text: 'EV Charging Point Installations',
+    buttonText: 'View Services',
+    buttonLink: '/services/ev-charging',
+  },
+  {
+    image: slide3,
+    alt: 'Electrical Maintenance',
+    text: '24 Hour Emergency Callout',
+    buttonText: 'Emergency Service',
+    buttonLink: '/emergency',
+  },
+];
 ---
-<section class="hero">
-  <div class="wrap">
-    <h1>{title}</h1>
-    {subtitle && <p class="sub">{subtitle}</p>}
+
+<Section lightningPathcolour="fff">
+  <div class="carousel-container">
+    <div class="hero-swiper swiper">
+      <div class="swiper-wrapper">
+        {
+          slides.map((slide) => (
+            <div class="swiper-slide">
+              <Image
+                src={slide.image}
+                alt={slide.alt}
+                class="slide-image"
+                loading="eager"
+                decoding="async"
+              />
+              <div class="carousel-caption">
+                <h2>{slide.text}</h2>
+                <a href={slide.buttonLink} class="slide-btn">{slide.buttonText}</a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button swiper-button-prev"></div>
+      <div class="swiper-button swiper-button-next"></div>
+    </div>
   </div>
-</section>
+</Section>
+
+<style>
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 60px);
+    max-height: 440px;
+    overflow: hidden;
+  }
+
+  .hero-swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .swiper-button::after {
+    font-size: 32px;
+    color: #fdee21;
+  }
+
+  .carousel-caption {
+    position: absolute;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, rgba(64, 130, 32, 0.85), rgba(48, 102, 24, 0.95));
+    color: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    min-width: 300px;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .carousel-caption h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .slide-btn {
+    display: inline-block;
+    background: #fdee21;
+    color: #616060;
+    padding: 0.75rem 2rem;
+    border-radius: 5px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-caption {
+      top: 35%;
+      bottom: auto;
+      padding: 1rem 1.5rem;
+      min-width: 250px;
+    }
+
+    .carousel-caption h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .slide-btn {
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carousel-caption {
+      bottom: 10%;
+      top: auto;
+      padding: 0.75rem 1rem;
+    }
+
+    .carousel-caption h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-btn {
+      padding: 0.4rem 1.25rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  .swiper-pagination {
+    bottom: 15% !important;
+  }
+</style>
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+  import 'swiper/css/bundle';
+
+  const initHeroSwiper = () => {
+    const root = document.querySelector('.hero-swiper');
+    if (!(root instanceof HTMLElement)) return;
+
+    // avoid double init (dev and page transitions)
+    if (root.dataset.swiperInit === 'true') return;
+    root.dataset.swiperInit = 'true';
+
+    // Ensure required elements exist before initialising
+    const paginationEl = root.querySelector('.swiper-pagination');
+    const nextEl = root.querySelector('.swiper-button-next');
+    const prevEl = root.querySelector('.swiper-button-prev');
+
+    if (!(paginationEl instanceof HTMLElement)) return;
+    if (!(nextEl instanceof HTMLElement)) return;
+    if (!(prevEl instanceof HTMLElement)) return;
+
+    new Swiper(root, {
+      modules: [Navigation, Pagination, Autoplay],
+      loop: true,
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      pagination: { el: paginationEl, clickable: true },
+      navigation: { nextEl, prevEl },
+    });
+  };
+
+  // Works for normal loads
+  document.addEventListener('DOMContentLoaded', initHeroSwiper);
+
+  // Works if you are using Astro client-side navigation
+  document.addEventListener('astro:page-load', initHeroSwiper);
+</script>
+
+
+
