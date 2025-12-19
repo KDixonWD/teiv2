@@ -1,12 +1,538 @@
 ---
+import { Image } from 'astro:assets';
+
+/* Images (same approach as mobile nav) */
+import logoUrl from '../assets/global/TEI_logo.png';
+import yellLogoUrl from '../assets/global/Yell-Reviews-Logo.png';
+
+/* Icons (SVG components, same approach as mobile nav) */
+import LocationIcon from '../assets/icons/location.svg';
+import PhoneIcon from '../assets/icons/phone.svg';
+import EmailIcon from '../assets/icons/email.svg';
+
+import FacebookIcon from '../assets/icons/facebook.svg';
+import LinkedinIcon from '../assets/icons/linkedin.svg';
+import InstagramIcon from '../assets/icons/instagram.svg';
+
+const currentYear = new Date().getFullYear();
 ---
-<footer class="site-footer">
-  <div class="wrap">
-    <p>© {new Date().getFullYear()} TEI Electrical Ltd. All rights reserved.</p>
-    <nav>
-      <a href="/teiv2/privacy-policy">Privacy</a>
-      <a href="/teiv2/terms-conditions">Terms</a>
-      <a href="/teiv2/complaints-procedure">Complaints</a>
-    </nav>
+
+<footer class="footer" aria-label="Site footer">
+  <div class="footer-top">
+    <div class="footer-inner">
+      <!-- About -->
+      <section class="footer-panel footer-panel--about" aria-label="About">
+        <a href="/teiv2/home" class="footer-logo-link" aria-label="Go to homepage">
+          <Image src={logoUrl} alt="TEI Electrical Logo" class="footer-logo" loading="lazy" decoding="async" />
+        </a>
+
+        <p class="footer-about">
+          Your trusted electrical contractor in North Yorkshire. Providing professional electrical services with a commitment to quality and safety.
+        </p>
+      </section>
+
+      <!-- Right -->
+      <div class="footer-right">
+        <!-- Useful links -->
+        <section class="footer-panel footer-panel--links" aria-label="Useful links">
+          <div class="links-row">
+            <h3 class="footer-heading">Useful Links</h3>
+
+            <ul class="links-list" aria-label="Footer navigation">
+              <li><a href="/teiv2/about-us" class="nav-link">About Us</a></li>
+              <li class="sep" aria-hidden="true"></li>
+
+              <li><a href="/teiv2/services" class="nav-link">Services</a></li>
+              <li class="sep" aria-hidden="true"></li>
+
+              <li><a href="/teiv2/portfolio" class="nav-link">Portfolio</a></li>
+              <li class="sep" aria-hidden="true"></li>
+
+              <li><a href="/teiv2/contact" class="nav-link">Contact</a></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Three columns -->
+        <div class="footer-columns">
+          <!-- Office -->
+          <section class="footer-panel" aria-label="Office information">
+            <h3 class="footer-heading">Our Office</h3>
+
+            <address class="address">
+              <div class="address-row address-row--top">
+                <LocationIcon class="icon icon--md icon--accent" aria-hidden="true" />
+                <div class="address-text">
+                  <p>60 Stonegate, Hunmanby,</p>
+                  <p>North Yorkshire, YO14 0NS</p>
+                </div>
+              </div>
+
+              <div class="address-row">
+                <PhoneIcon class="icon icon--md icon--accent" aria-hidden="true" />
+                <a href="tel:01723449667" class="nav-link nav-link--small">01723 449667</a>
+              </div>
+
+              <div class="address-row">
+                <EmailIcon class="icon icon--md icon--accent" aria-hidden="true" />
+                <a href="mailto:info@tei-ltd.co.uk" class="nav-link nav-link--small">info@tei-ltd.co.uk</a>
+              </div>
+            </address>
+          </section>
+
+          <!-- Hours -->
+          <section class="footer-panel" aria-label="Business hours">
+            <h3 class="footer-heading">Business Hours</h3>
+
+            <div class="hours">
+              <div class="hours-row">
+                <span>Monday - Friday</span>
+                <span>8:00am – 5:30pm</span>
+              </div>
+              <div class="hours-row">
+                <span>Saturday</span>
+                <span>8:00am – 12:00pm</span>
+              </div>
+              <div class="hours-row">
+                <span>Sunday</span>
+                <span>Closed</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Social -->
+          <section class="footer-panel" aria-label="Social links">
+            <h3 class="footer-heading">Connect With Us</h3>
+
+            <div class="social-row">
+              <a
+                href="https://www.facebook.com/themelectricalinstallationsltd/"
+                target="_blank"
+                rel="noopener"
+                class="social-btn"
+                aria-label="Facebook"
+              >
+                <FacebookIcon class="icon icon--md" aria-hidden="true" />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener"
+                class="social-btn"
+                aria-label="LinkedIn"
+              >
+                <LinkedinIcon class="icon icon--md" aria-hidden="true" />
+              </a>
+
+              <a
+                href="https://www.instagram.com/tei_ltd/"
+                target="_blank"
+                rel="noopener"
+                class="social-btn"
+                aria-label="Instagram"
+              >
+                <InstagramIcon class="icon icon--md" aria-hidden="true" />
+              </a>
+            </div>
+
+            <a
+              href="https://www.yell.com/biz/them-electrical-installations-ltd-filey-10772044/"
+              target="_blank"
+              rel="noopener"
+              class="yell-btn"
+              aria-label="Yell reviews"
+            >
+              <Image src={yellLogoUrl} alt="Yell Reviews" class="yell-logo" loading="lazy" decoding="async" />
+            </a>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <div class="footer-inner footer-inner--bottom">
+      <nav class="bottom-links" aria-label="Legal links">
+        <a href="/teiv2/terms-conditions" class="nav-link nav-link--small">Terms</a>
+        <span class="dot" aria-hidden="true"></span>
+
+        <a href="/teiv2/privacy-policy" class="nav-link nav-link--small">Privacy</a>
+        <span class="dot" aria-hidden="true"></span>
+
+        <a href="/teiv2/quality-policy" class="nav-link nav-link--small">Quality</a>
+        <span class="dot" aria-hidden="true"></span>
+
+        <a href="/teiv2/complaints-procedure" class="nav-link nav-link--small">Complaints</a>
+        <span class="dot" aria-hidden="true"></span>
+
+        <a href="/teiv2/waste-policy" class="nav-link nav-link--small">Environment &amp; Waste</a>
+      </nav>
+
+      <p class="copyright">
+        &copy; {currentYear} TEI Electrical. All rights reserved.
+      </p>
+    </div>
   </div>
 </footer>
+
+<style>
+  /* Mirrors header + mobile nav token usage */
+  .footer {
+    --panel-bg: rgba(0, 0, 0, 0.22);
+    --panel-border: rgba(255, 255, 255, 0.14);
+    --muted: rgba(255, 255, 255, 0.78);
+
+    color: var(--color-bg);
+  }
+
+  .footer-top {
+    background: rgb(62, 62, 62);
+    padding: 3rem 0;
+  }
+
+  .footer-bottom {
+    background: rgba(62, 62, 62, 0.96);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.75rem 0;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .footer-inner--bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .footer-inner > .footer-panel + .footer-right {
+    margin-top: 0;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-inner {
+      grid-template-columns: 3fr 9fr;
+      align-items: start;
+    }
+
+    .footer-inner--bottom {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-columns {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Panels */
+  .footer-panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 14px;
+    padding: 1.05rem 1.25rem;
+  }
+
+  .footer-panel--about {
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-panel--links {
+    padding: 0.95rem 1.25rem;
+  }
+
+  /* Icons (same normalisation pattern as mobile nav) */
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: inline-block;
+    flex: 0 0 auto;
+  }
+
+  .icon--md {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .icon--accent {
+    color: var(--color-accent);
+  }
+
+  /* About */
+  .footer-logo-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .footer-logo {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    display: block;
+    margin-bottom: 1.1rem;
+  }
+
+  .footer-about {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* Headings */
+  .footer-heading {
+    margin: 0 0 0.85rem;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    color: var(--color-accent);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .footer-heading {
+      text-align: left;
+    }
+  }
+
+  /* Links row */
+  .links-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .links-row {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+  }
+
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .links-list {
+      justify-content: flex-start;
+      flex: 1;
+    }
+  }
+
+  .sep {
+    width: 1px;
+    height: 1.05rem;
+    background: rgba(253, 238, 33, 0.35);
+    display: inline-block;
+  }
+
+  /* Nav links (same underline hover as header) */
+  .nav-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 0.25rem 0;
+    position: relative;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.25rem;
+    width: 0;
+    height: 3px;
+    background: currentColor;
+    transition: width 0.5s ease;
+  }
+
+  .nav-link:hover {
+    color: #ffffff;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-link--small {
+    font-size: 0.98rem;
+    font-weight: 700;
+  }
+
+  /* Address */
+  .address {
+    margin: 0;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    line-height: 1.35;
+    color: var(--muted);
+  }
+
+  .address-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .address-row--top {
+    align-items: flex-start;
+  }
+
+  .address-text p {
+    margin: 0;
+  }
+
+  /* Hours */
+  .hours {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    color: var(--muted);
+  }
+
+  .hours-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Social */
+  .social-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.85rem;
+    margin: 0.25rem 0 1.1rem;
+  }
+
+  @media (min-width: 768px) {
+    .social-row {
+      justify-content: flex-start;
+    }
+  }
+
+  .social-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .social-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+  }
+
+  .yell-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 44px;
+
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    padding: 0.55rem 0.75rem;
+    text-decoration: none;
+  }
+
+  .yell-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .yell-logo {
+    max-width: 160px;
+    width: 100%;
+    height: auto;
+
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 0.2rem 0.5rem;
+    display: block;
+  }
+
+  /* Bottom */
+  .bottom-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--color-accent);
+    display: inline-block;
+    opacity: 0.95;
+  }
+
+  .copyright {
+    margin: 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+</style>
+
