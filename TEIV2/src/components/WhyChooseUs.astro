@@ -1,0 +1,174 @@
+---
+import Section from './Section.astro';
+import SectionHeader from './SectionHeader.astro';
+
+interface Feature {
+  icon?: string; // Optional icon class (e.g. "bi bi-check2-square")
+  title: string;
+  description: string;
+}
+
+interface Props {
+  theme?: 'light' | 'dark';
+  title?: string;
+  subtitle?: string;
+  features?: Feature[];
+}
+
+const {
+  theme = 'light',
+  title = "Why Clients Trust Us", // Default new title
+  subtitle = "We deliver more than just electrical work, here's what sets us apart.",
+  features = [
+    { icon: "bi bi-check2-square", title: "Experience", description: "Our team comprises of fully qualified electricians, with 25 years of combined industry experience." },
+    { icon: "bi bi-smartwatch", title: "Reliability", description: "We are clean, tidy, punctual, friendly and most importantly we do exactly what we say we’ll do." },
+    { icon: "bi bi-list-stars", title: "Quality", description: "As NAPIT and Trustmark members, we guarantee that our work is safe, compliant, and fully certified." }
+  ]
+} = Astro.props;
+---
+
+<Section theme={theme}>
+  <div class="why-choose-us">
+    <SectionHeader title={title} theme={theme} />
+    <p class="subtitle">{subtitle}</p>
+    <div class="features-row-modern">
+      {features.map(feature => (
+        <div class={`feature-card-modern ${theme}`}>
+          <div class="feature-card-inner">
+            <div class="feature-icon-modern">
+              <i class={feature.icon}></i>
+            </div>
+            <div class="feature-content-modern">
+              <h3 class="feature-title-modern">{feature.title}</h3>
+              <p class="feature-desc-modern">{feature.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Section>
+
+<style>
+  .why-choose-us {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  .subtitle {
+    font-size: 1.15rem;
+    margin-bottom: 2.5rem;
+    color: var(--subtitle-color, #616060);
+    text-align: center;
+  }
+  .features-row-modern {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin: 0 auto;
+  }
+  @media (min-width: 900px) {
+    .features-row-modern {
+      flex-direction: row;
+      gap: 2.5rem;
+      justify-content: center;
+      align-items: stretch;
+    }
+  }
+  .feature-card-modern {
+    background: #fdee21;
+    border-radius: 1.25rem;
+    box-shadow: 0 2px 16px rgba(64,130,32,0.10);
+    padding: 0;
+    position: relative;
+    min-width: 0;
+    flex: 1 1 0;
+    border: none;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    max-width: 600px;
+    min-height: 120px;
+    height: 120px;
+    margin: 0 auto;
+  }
+  .feature-card-modern.dark {
+    background: #408220;
+    box-shadow: 0 2px 16px rgba(253,238,33,0.08);
+  }
+  .feature-card-inner {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 2rem;
+    gap: 1.5rem;
+    height: 100%;
+  }
+  @media (max-width: 600px) {
+    .feature-card-inner {
+      grid-template-columns: 60px 1fr;
+      padding: 0.75rem 1rem;
+      gap: 1rem;
+      height: auto;
+    }
+    .feature-card-modern {
+      max-width: 100%;
+      min-height: 100px;
+      height: auto;
+    }
+  }
+  .feature-icon-modern {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    width: 60px;
+    height: 60px;
+    background: #232323;
+    border-radius: 1rem;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(64,130,32,0.10);
+    border: none;
+  }
+  .feature-card-modern.dark .feature-icon-modern {
+    background: #fff;
+    color: #408220;
+    box-shadow: 0 2px 8px rgba(253,238,33,0.10);
+  }
+  .feature-content-modern {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center horizontally */
+    text-align: center;  /* Center text */
+    gap: 0.25rem;
+    height: 100%;
+  }
+  .feature-title-modern {
+    font-size: 1.35rem; /* Increased size */
+    font-weight: 800;
+    margin-bottom: 0.15rem;
+    letter-spacing: 0.01em;
+    color: #232323;
+    text-align: center;
+  }
+  .feature-card-modern.dark .feature-title-modern {
+    color: #fff;
+  }
+  .feature-desc-modern {
+    font-size: 1rem;
+    color: #232323;
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.4;
+    background: none;
+    padding-top: 0.1rem;
+    text-align: center;
+  }
+  .feature-card-modern.dark .feature-desc-modern {
+    color: #fff;
+    text-shadow: none;
+  }
+</style>

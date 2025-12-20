@@ -1,0 +1,180 @@
+---
+import Section from './Section.astro';
+import SectionHeader from './SectionHeader.astro';
+
+const testimonials = [
+
+
+ {
+    quote: "Phoned the company this morning and Harry came out within a few hours to fit up three light fittings. Nothing was too much trouble, really polite and a nice genuine gentleman. I would highly recommend this company and I’m so pleased to now have a good contact for any other electrical work. Thank you.",
+    author: "Rosanne Cowling",
+  },
+  {
+    quote: "My neighbour needed an outside security light, she is elderly and didn’t know where to go or who to ring, I contacted THEM Electrical for her and they were absolutely fantastic, very professional, efficient, came out to look at the job, I couldn’t recommend them enough and my neighbour was extremely happy with the result, I would definitely recommend them.",
+    author: "Sue Harvey",
+  },
+    {
+    quote: "Harry is great. He gets back to you. He is willing to work with your schedule and does a quick clean quality work . I would recommend him to anyone who needs an electrician",
+    author: "Tia Marie",
+  },
+  {
+    quote: "Excellent company, I had no power to the house on a Sunday. I contacted THEM Electrical and they came out within half an hour. Harry was very thorough and fix the problem straight away. Thank you Harry",
+    author: "Andrew Smith",
+  },{
+    quote: "Very high standard of work. Harry and Tom fitted a new suspended ceiling incorporating LED lighting along with new lighting, signage in our delicatessen. They accommodated us by working on a Sunday when our shop was closed. Both very pleasant young men who did an excellent job at a fair price.",
+    author: "Dale Farm Foods - Leeds",
+  },
+  {
+    quote: "I would definitely recommend this firm for all your electrical works. We have used them for both domestic and commercial work. Excellent customer service, high standard of work and competitively priced",
+    author: "Julia Wood",
+  }
+];
+---
+
+<Section theme="dark">
+  <div class="testimonials">
+    <SectionHeader title="What Our Clients Say" theme="dark"/>
+    <div class="testimonials-container">
+      <div class="testimonials-swiper swiper"> <!-- Added 'swiper' class -->
+        <div class="swiper-wrapper">
+          {testimonials.map(testimonial => (
+            <div class="swiper-slide">
+              <blockquote>
+                <p>"{testimonial.quote}"</p>
+                <div class="author" >- {testimonial.author}</div>
+              </blockquote>
+            </div>
+          ))}
+        </div>
+        <div class="swiper-button swiper-button-prev"></div>
+        <div class="swiper-button swiper-button-next"></div>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style>
+
+  .testimonials-container {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+  }
+
+  .testimonials-swiper {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .swiper-slide {
+    height: auto;
+    width: calc(33% -20px)
+    }
+      blockquote {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 1.5rem;
+    background-color: #2e2e2e; /* Match Footer logo-section/section-bg */
+    padding: 1rem 2.5em;
+    border-radius: 1.5rem; /* Rounded edges */
+    color: white;
+    border-top: 2px solid #fdee21; /* Match Footer border thickness */
+    border-bottom: 2px solid #fdee21;
+  }
+
+  blockquote p {
+    font-style: italic;
+    line-height: 1.5;
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  blockquote p::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  blockquote p::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  blockquote p::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+  }
+
+  .author {
+    margin-top: 1rem;
+    text-align: right;
+    font-weight: bold;
+    color: #fdee21;
+    border-top: 2px solid #fdee21; /* Match Footer border thickness */
+    border-bottom: 2px solid #fdee21; /* Match Footer border thickness */ 
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #fdee21; /* Solid grey color */
+    background: none;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #fdee21; /* Thicker arrows */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .swiper-button-next {
+    right: 0px;
+  }
+
+  .swiper-button-prev {
+    left: 0px;
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+  import 'swiper/css/bundle';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    new Swiper('.testimonials-swiper', {
+      modules: [Navigation, Pagination, Autoplay],
+      slidesPerView: 3,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 30
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30
+        }
+      }
+    });
+  });
+</script>

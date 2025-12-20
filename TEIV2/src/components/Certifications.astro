@@ -1,0 +1,59 @@
+---
+import Section from './Section.astro';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  images: { src: string; alt?: string }[];
+  title?: string;
+  theme?: 'light' | 'dark';
+}
+const { images = [], title = 'Our Certifications', theme = 'light' } = Astro.props;
+---
+
+<Section theme={theme} lightningPathcolour="#3e3e3e">
+  <div class="certifications">
+    <SectionHeader title={title} theme={theme} />
+    <div class="certifications-row">
+      {images.slice(0, 5).map((img) => (
+        <div class="certification-img-wrapper">
+          <img src={img.src} alt={img.alt ?? 'Certification'} class="certification-img" />
+        </div>
+      ))}
+    </div>
+  </div>
+</Section>
+
+<style>
+  .certifications {
+    padding: 2rem 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .certifications-row {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .certification-img-wrapper {
+    flex: 1 1 160px;
+    max-width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    background: transparent;
+  }
+  .certification-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: #fff;
+    padding: 0.5rem;
+  }
+</style>
