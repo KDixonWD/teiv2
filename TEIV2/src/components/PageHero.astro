@@ -1,0 +1,149 @@
+---
+import { Image } from 'astro:assets';
+import Section from './Section.astro';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  image?: any;
+  imageAlt?: string;
+}
+
+const { title, subtitle, image, imageAlt = '' } = Astro.props;
+const isImageString = typeof image === 'string';
+---
+
+<Section theme="light" lightningPathcolour="#FFF">
+  <div class="page-hero">
+    {image && (
+      <div class="hero-image-wrapper">
+        {isImageString ? (
+          <img 
+            src={image} 
+            alt={imageAlt} 
+            class="hero-image"
+          />
+        ) : (
+          <Image 
+            src={image} 
+            alt={imageAlt} 
+            class="hero-image"
+            loading="eager"
+            decoding="async"
+          />
+        )}
+      </div>
+    )}
+    
+    <div class="hero-content">
+      <div class="hero-header">
+        <h1 class="hero-title">{title}</h1>
+        {subtitle && <p class="hero-subtitle">{subtitle}</p>}
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .page-hero {
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10rem 1.5rem 5rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero-header {
+    background: var(--brand-yellow);
+    padding: 1rem 2.5rem;
+    border-radius: 16px;
+    border: 3px solid var(--brand-dark);
+    box-shadow: 
+      
+      0 0 0 6px rgb(253, 238, 33);
+    position: relative;
+    display: inline-block;
+    min-width: 300px;
+  }
+
+  .hero-title {
+    margin: 0;
+    color: var(--brand-dark);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    margin: 1rem 0 0 0;
+    color: var(--brand-dark);
+    font-size: 1.125rem;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  @media (max-width: 768px) {
+    .page-hero {
+      min-height: 300px;
+    }
+
+    .hero-content {
+        padding: 8rem 1.5rem 5rem 1.5rem;
+    }
+
+    .hero-header {
+      padding: 1.5rem 1.75rem;
+      min-width: 250px;
+    }
+
+    .hero-title {
+      font-size: 1.75rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-header {
+      padding: 1.25rem 1.5rem;
+      min-width: auto;
+      width: 100%;
+    }
+
+    .hero-title {
+      font-size: 1.5rem;
+    }
+  }
+</style>

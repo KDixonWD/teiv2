@@ -33,13 +33,13 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
       Domestic, commercial and renewables. Clear pricing and reliable call-outs.
     </p>
 
-    <a href="/quote" class="cta-btn" data-close-mobile-nav>
+    <button class="cta-btn" data-open-contact-modal data-close-mobile-nav>
       <span class="cta-btn-left">
         <BoltIcon class="icon icon--md" />
         <span>Request a quote</span>
       </span>
       <ArrowRightIcon class="icon icon--md" />
-    </a>
+    </button>
   </div>
 
   <nav class="nav" aria-label="Mobile navigation">
@@ -108,11 +108,6 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
       <EmailIcon class="icon icon--md icon--accent" />
       <span>info@tei-ltd.co.uk</span>
     </a>
-
-    <a href="/emergency" class="emergency-btn" data-close-mobile-nav>
-      <EmergencyIcon class="icon icon--md" />
-      <span>24/7 Emergency Service</span>
-    </a>
   </div>
 
   <div class="full-divider" aria-hidden="true"></div>
@@ -152,7 +147,7 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
   height: 100vh;
 
   /* Solid background */
-  background: rgb(62, 62, 62);
+  background: rgb(30, 30, 30);
 
   z-index: 1000;
   display: flex;
@@ -161,7 +156,7 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
   border-left: 2px solid rgba(255, 255, 255, 0.06);
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.35);
 
-  padding: 1.1rem;
+  padding: 1.1rem 1.1rem 2rem;
 
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -197,14 +192,19 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
 .full-divider {
   padding: 0.45rem 0;      /* dark grey space above and below the line */
   margin: 0 -1.1rem;       /* bleed to full width based on container padding */
-  background: rgb(62, 62, 62);
+  background: rgb(30, 30, 30);
 }
 
 .full-divider::before {
   content: "";
   display: block;
   height: 3px;
-  background: var(--color-primary);
+  background: linear-gradient(
+    270deg,
+    var(--color-accent) 0%,
+    var(--color-primary) 50%,
+    transparent 100%
+  );
 }
 
 /* Header */
@@ -214,7 +214,7 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
   align-items: center;
   justify-content: center;
 
-  background: rgb(62, 62, 62);
+  background: rgb(30, 30, 30);
   padding: 0.65rem 0 0.85rem;
 }
 
@@ -230,20 +230,33 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
   top: 50%;
   transform: translateY(-50%);
 
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
   padding: 0.45rem;
   cursor: pointer;
-  color: var(--color-bg);
+  color: var(--color-accent);
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--color-accent);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.close-btn:active {
+  transform: translateY(-50%) scale(0.95);
 }
 
 /* CTA */
 .cta {
   margin: 0.85rem 0 1.1rem;
-  padding: 1.1rem;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 2px solid var(--color-accent);
+  padding: 1.2rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .cta-kicker {
@@ -277,9 +290,32 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
   color: var(--color-contrast);
   text-decoration: none;
 
-  border-radius: 12px;
-  padding: 0.85rem 0.95rem;
+  border-radius: 50px;
+  padding: 0.95rem 1.2rem;
   font-weight: 900;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(253, 238, 33, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.cta-btn:active::before {
+  transform: translateX(0);
+}
+
+.cta-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(253, 238, 33, 0.4);
 }
 
 .cta-btn-left {
@@ -306,7 +342,7 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
   padding: 0.35rem 0;
   color: var(--color-bg);
   text-decoration: none;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 800;
 }
 
@@ -316,7 +352,7 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
   align-items: center;
   padding: 0.35rem 0;
   color: var(--color-bg);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 900;
   cursor: pointer;
 }
@@ -332,9 +368,10 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
 .nav-sub {
   margin-top: 0.6rem;
   padding: 0.75rem 0.85rem;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.18);
-  border: 2px solid var(--color-accent);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .nav-sublink {
@@ -352,12 +389,13 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
 
 /* Contact (polished) */
 .contact {
-  margin-top: 1.1rem;
+  margin-bottom: 1.5rem;
   padding: 0.9rem 0 0.2rem;
-  border-radius: 14px;
+  border-radius: 16px;
 
-  background: rgba(255, 255, 255, 0.04);
+  background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .contact-item {
@@ -372,6 +410,12 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
 
   padding: 0.75rem 0.85rem;
   border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.contact-item:active {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(4px);
 }
 
 .contact-item + .contact-item {
@@ -395,25 +439,6 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
   line-height: 1.15;
 }
 
-.emergency-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.7rem;
-
-  width: calc(100% - 1.7rem);
-  margin: 0.85rem auto 0.75rem;
-
-  background: var(--color-accent);
-  color: var(--color-contrast);
-
-  padding: 0.9rem 0.95rem;
-  border-radius: 12px;
-
-  font-weight: 950;
-  text-decoration: none;
-}
-
 /* Social (polished) */
 .social {
   display: flex;
@@ -432,11 +457,19 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
   align-items: center;
   justify-content: center;
 
-  background: rgba(255, 255, 255, 0.10);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: var(--color-accent);
+  border: 2px solid var(--color-accent);
 
-  color: var(--color-accent);
+  color: #1e1e1e;
   text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-btn:active {
+  background: #e8d01e;
+  border-color: var(--color-accent);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 12px rgba(253, 238, 33, 0.4);
 }
 
 .social-btn .icon {
@@ -447,24 +480,38 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
 .yell-btn {
   flex: 1;
   min-height: 3.1rem;
-  border-radius: 12px;
+  border-radius: 6px;
 
-  background: rgba(255, 255, 255, 0.10);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: var(--color-bg);
+  border: none;
 
-  padding: 0.6rem 0.9rem;
+  padding: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.yell-btn:active {
+  border-color: var(--color-accent);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(42, 145, 52, 0.4);
 }
 
 .yell-logo {
-  height: 1.9rem;
-  width: auto;
+  height: 100%;
+  width: 100%;
+  max-height: 3.1rem;
+  object-fit: contain;
+  background: var(--color-bg);
+  padding: 0.1rem;
   display: block;
+  border-radius: 6px;
+  border-left: solid 0.75rem #fdee21;
+  border-right: solid 0.75rem #fdee21;
 }
 </style>
 

@@ -1,11 +1,434 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 import ContactForm from '../components/ContactForm.astro';
+import PhoneIcon from '../assets/icons/phone.svg';
+import EmailIcon from '../assets/icons/email.svg';
+import LocationIcon from '../assets/icons/location.svg';
 ---
 <BaseLayout title="Contact">
-  <section class="wrap">
-    <h1>Contact Us</h1>
-    <p>Call us or use the form below.</p>
-    <ContactForm />
+  <PageHero 
+    title="Contact Us" 
+    subtitle="Get in touch for a free quote or consultation"
+    image="/teiv2/images/contact/Contact-Hero.jpg"
+    imageAlt="Contact TEI Electrical"
+  />
+  
+  <section class="contact-page">
+    <div class="contact-container">
+      <div class="contact-left">
+        <div class="section-header">
+          <div class="section-line"></div>
+          <h2 class="section-title">Get in Touch</h2>
+        </div>
+        <p class="contact-intro">Please complete the enquiry form and a member of our team will respond to you as soon as possible.</p>
+        <ContactForm />
+      </div>
+
+      <div class="contact-right">
+        <div class="section-header">
+          <div class="section-line"></div>
+          <h2 class="section-title">Contact Information</h2>
+        </div>
+        <p class="info-subtitle">Contact us today for professional electrical services across North Yorkshire.</p>
+        <div class="subtitle-divider" aria-hidden="true"></div>
+
+        <div class="info-items">
+          <a href="tel:01723449667" class="info-link">
+            <div class="info-link-content">
+              <PhoneIcon class="info-icon" aria-hidden="true" />
+              <div class="info-link-text">
+                <span class="info-label">Phone</span>
+                <span class="info-value">01723 449667</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="mailto:info@teielectrical.co.uk" class="info-link">
+            <div class="info-link-content">
+              <EmailIcon class="info-icon" aria-hidden="true" />
+              <div class="info-link-text">
+                <span class="info-label">Email</span>
+                <span class="info-value">info@teielectrical.co.uk</span>
+              </div>
+            </div>
+          </a>
+
+          <div class="info-row">
+            <LocationIcon class="info-icon" aria-hidden="true" />
+            <div class="info-text">
+              <span class="info-label">Service Area</span>
+              <p class="address-line">North Yorkshire & Surrounding Areas, including Hunmanby, Filey, Scarborough, Bridlington, and Malton</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="business-hours">
+          <h3>Business Hours</h3>
+          <dl class="hours">
+            <div class="hours-row">
+              <dt>Monday - Friday</dt>
+              <dd>8:00am – 5:00pm</dd>
+            </div>
+            <div class="hours-row">
+              <dt>Saturday</dt>
+              <dd>8:00am – 12:00pm</dd>
+            </div>
+            <div class="hours-row">
+              <dt>Sunday</dt>
+              <dd>Closed</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="emergency-notice">
+          <h3>24/7 Emergency Callout</h3>
+          <p>Available day and night for emergency electrical issues in Scarborough, Bridlington, Hunmanby, and nearby areas.</p>
+          <a href="/teiv2/emergency" class="emergency-btn">
+            Emergency Services
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-container">
+      <SectionHeader title="Find Us" theme="light" />
+      <p class="map-subtitle">Our office is located in Hunmanby, North Yorkshire</p>
+      <div class="map-wrapper">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2333.3!2d-0.257!3d54.178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487f1b5e5e5e5e5e%3A0x5e5e5e5e5e5e5e5e!2s60%20Stonegate%2C%20Hunmanby%2C%20Filey%20YO14%200NS!5e0!3m2!1sen!2suk!4v1234567890"
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="TEI Electrical Location"
+        ></iframe>
+      </div>
+    </div>
   </section>
+</BaseLayout>
+
+<style>
+  .contact-page {
+    padding: 3rem 0;
+    min-height: 100vh;
+  }
+
+  .contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 968px) {
+    .contact-container {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+  }
+
+  /* Contact Form Card */
+  .contact-left {
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+  }
+
+  /* Contact Info Card */
+  .contact-right {
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+  }
+
+  /* Section Headers with gradient lines */
+  .section-header {
+    position: relative;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-line {
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 50%, transparent 100%);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    margin: 0;
+    font-weight: 950;
+    font-size: 1.65rem;
+    letter-spacing: 0.2px;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .contact-intro {
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 2rem 0;
+    line-height: 1.65;
+    font-size: 1.05rem;
+  }
+
+  .info-subtitle {
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 2rem 0;
+    line-height: 1.65;
+    font-size: 1.05rem;
+  }
+
+  .subtitle-divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.2) 80%,
+      transparent
+    );
+    margin-bottom: 2rem;
+  }
+
+  .info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-link {
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 1rem;
+    margin: 0 -1rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+
+  .info-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(253, 238, 33, 0.2);
+    transform: translateX(4px);
+  }
+
+  .info-link-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .info-link-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .info-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .info-value {
+    font-size: 1.1rem;
+    font-weight: 850;
+    color: #ffffff;
+  }
+
+  .info-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 0 -1rem;
+    border-radius: 12px;
+  }
+
+  .info-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .info-text .info-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .address-line {
+    font-size: 1.05rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.2) 80%,
+      transparent
+    );
+    margin: 1.5rem 0;
+  }
+
+  .business-hours h3,
+  .emergency-notice h3 {
+    margin: 0 0 1rem 0;
+    color: var(--color-accent);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .hours {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .hours-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    padding: 0.7rem 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.2s ease;
+    border-radius: 6px;
+  }
+
+  .hours-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .hours-row:last-child {
+    border-bottom: none;
+  }
+
+  .hours-row dt {
+    font-weight: 600;
+  }
+
+  .hours-row dd {
+    margin: 0;
+    text-align: right;
+  }
+
+  .emergency-notice p {
+    color: rgba(255, 255, 255, 0.72);
+    margin: 0 0 1.5rem 0;
+    line-height: 1.65;
+  }
+
+  .emergency-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    border: 2px solid var(--color-accent);
+    text-decoration: none;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    font-size: 1.05rem;
+    color: var(--brand-black);
+    background: var(--color-accent);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(253, 238, 33, 0.4);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .emergency-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .emergency-btn:hover {
+    box-shadow: 0 6px 24px rgba(253, 238, 33, 0.5);
+    transform: translateY(-2px);
+  }
+
+  .emergency-btn:hover::before {
+    transform: translateX(0);
+  }
+
+  /* Map Section */
+  .map-container {
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    padding: 0 1.5rem;
+  }
+
+  .map-subtitle {
+    color: rgba(0,0,0,0.65);
+    text-align: center;
+    margin-bottom: 2rem;
+    line-height: 1.65;
+    font-size: 1.05rem;
+
+  }
+
+  .map-wrapper {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(96, 96, 97, 0.5);
+    transition: border-color 0.3s ease;
+  }
+
+  .map-wrapper:hover {
+    border-color: rgba(96, 96, 97, 0.8);
+  }
+
+  .map-wrapper iframe {
+    display: block;
+    width: 100%;
+    height: 450px;
+  }
+
+  @media (max-width: 768px) {
+    .map-wrapper iframe {
+      height: 350px;
+    }
+  }
+</style>
 </BaseLayout>

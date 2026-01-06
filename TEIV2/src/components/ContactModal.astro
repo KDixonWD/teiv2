@@ -1,0 +1,192 @@
+---
+import ContactForm from './ContactForm.astro';
+import CloseIcon from '../assets/icons/close.svg';
+---
+
+<div class="modal-overlay" id="contactModal" aria-hidden="true">
+  <div class="modal-dialog" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+    <div class="modal-header">
+      <h2 id="modal-title">Get in Touch</h2>
+      <button class="modal-close" id="closeModal" aria-label="Close contact form">
+        <CloseIcon class="icon" />
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="modal-intro">Fill out the form and we'll get back to you as soon as possible.</p>
+      <ContactForm />
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+
+  .modal-overlay[aria-hidden="false"] {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-dialog {
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    border-radius: 16px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .modal-overlay[aria-hidden="false"] .modal-dialog {
+    transform: scale(1);
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 3px solid;
+    border-image: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 50%, transparent 100%) 1;
+    position: sticky;
+    top: 0;
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.98) 0%, rgba(38, 38, 38, 0.98) 100%);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+  }
+
+  .modal-header h2 {
+    margin: 0;
+    font-weight: 950;
+    font-size: 1.65rem;
+    letter-spacing: 0.2px;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .modal-close {
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+  }
+
+  .modal-close:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(253, 238, 33, 0.3);
+  }
+
+  .modal-close .icon {
+    width: 24px;
+    height: 24px;
+    color: var(--color-accent);
+  }
+
+  .modal-body {
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+  }
+
+  .modal-intro {
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 2rem 0;
+    line-height: 1.65;
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 768px) {
+    .modal-dialog {
+      max-height: 95vh;
+    }
+
+    .modal-header {
+      padding: 1rem 1.5rem;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Open modal
+  function openContactModal() {
+    const modal = document.getElementById('contactModal');
+    if (modal) {
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  // Close modal
+  function closeContactModal() {
+    const modal = document.getElementById('contactModal');
+    if (modal) {
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Setup event listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    const closeBtn = document.getElementById('closeModal');
+    const modal = document.getElementById('contactModal');
+
+    // Close button
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeContactModal);
+    }
+
+    // Close on overlay click
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeContactModal();
+        }
+      });
+    }
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeContactModal();
+      }
+    });
+
+    // Listen for open modal triggers
+    document.querySelectorAll('[data-open-contact-modal]').forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        openContactModal();
+      });
+    });
+  });
+</script>

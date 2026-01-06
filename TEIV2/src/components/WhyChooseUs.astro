@@ -1,9 +1,12 @@
 ---
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
+import CheckIcon from '../assets/icons/check.svg';
+import ClockIcon from '../assets/icons/clock.svg';
+import StarIcon from '../assets/icons/star.svg';
 
 interface Feature {
-  icon?: string; // Optional icon class (e.g. "bi bi-check2-square")
+  icon: any;
   title: string;
   description: string;
 }
@@ -20,9 +23,21 @@ const {
   title = "Why Clients Trust Us", // Default new title
   subtitle = "We deliver more than just electrical work, here's what sets us apart.",
   features = [
-    { icon: "bi bi-check2-square", title: "Experience", description: "Our team comprises of fully qualified electricians, with 25 years of combined industry experience." },
-    { icon: "bi bi-smartwatch", title: "Reliability", description: "We are clean, tidy, punctual, friendly and most importantly we do exactly what we say we’ll do." },
-    { icon: "bi bi-list-stars", title: "Quality", description: "As NAPIT and Trustmark members, we guarantee that our work is safe, compliant, and fully certified." }
+    { 
+      icon: CheckIcon, 
+      title: "Experience", 
+      description: "Our team comprises of fully qualified electricians, with 25 years of combined industry experience." 
+    },
+    { 
+      icon: ClockIcon, 
+      title: "Reliability", 
+      description: "We are clean, tidy, punctual, friendly and most importantly we do exactly what we say we'll do." 
+    },
+    { 
+      icon: StarIcon, 
+      title: "Quality", 
+      description: "As NAPIT and Trustmark members, we guarantee that our work is safe, compliant, and fully certified." 
+    }
   ]
 } = Astro.props;
 ---
@@ -32,14 +47,17 @@ const {
     <SectionHeader title={title} theme={theme} />
     <p class="subtitle">{subtitle}</p>
     <div class="features-row-modern">
-      {features.map(feature => (
-        <div class={`feature-card-modern ${theme}`}>
+      {features.map((feature, index) => (
+        <div class={`feature-card-modern ${theme === 'light' ? 'card-dark' : 'card-yellow'}`}>
+          <div class="card-divider"></div>
           <div class="feature-card-inner">
             <div class="feature-icon-modern">
-              <i class={feature.icon}></i>
+              <feature.icon class="icon" />
             </div>
+            <div class="vertical-divider"></div>
             <div class="feature-content-modern">
               <h3 class="feature-title-modern">{feature.title}</h3>
+              <div class="content-divider"></div>
               <p class="feature-desc-modern">{feature.description}</p>
             </div>
           </div>
@@ -51,124 +69,230 @@ const {
 
 <style>
   .why-choose-us {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 3rem 1.5rem;
     text-align: center;
   }
+
   .subtitle {
-    font-size: 1.15rem;
-    margin-bottom: 2.5rem;
-    color: var(--subtitle-color, #616060);
-    text-align: center;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    color: rgba(0, 0, 0, 0.65);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
   }
+
   .features-row-modern {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
     margin: 0 auto;
   }
-  @media (min-width: 900px) {
+
+  @media (min-width: 768px) {
     .features-row-modern {
-      flex-direction: row;
-      gap: 2.5rem;
-      justify-content: center;
-      align-items: stretch;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
     }
   }
+
   .feature-card-modern {
-    background: #fdee21;
-    border-radius: 1.25rem;
-    box-shadow: 0 2px 16px rgba(64,130,32,0.10);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     padding: 0;
     position: relative;
-    min-width: 0;
-    flex: 1 1 0;
-    border: none;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    max-width: 600px;
-    min-height: 120px;
-    height: 120px;
-    margin: 0 auto;
+    overflow: hidden;
+    transition: all 0.3s ease;
   }
-  .feature-card-modern.dark {
-    background: #408220;
-    box-shadow: 0 2px 16px rgba(253,238,33,0.08);
+
+  /* Dark cards for light background */
+  .feature-card-modern.card-dark {
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
+
+  .feature-card-modern.card-dark:hover {
+    border-color: rgba(253, 238, 33, 0.3);
+  }
+
+  .feature-card-modern.card-dark .feature-title-modern {
+    color: #ffffff;
+  }
+
+  .feature-card-modern.card-dark .feature-desc-modern {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .feature-card-modern.card-dark .feature-icon-modern {
+    background: linear-gradient(135deg, var(--color-accent) 0%, rgba(253, 238, 33, 0.85) 100%);
+    color: var(--brand-black);
+    box-shadow: 0 4px 12px rgba(253, 238, 33, 0.3);
+  }
+
+  /* Yellow cards for dark background */
+  .feature-card-modern.card-yellow {
+    background: linear-gradient(135deg, var(--color-accent) 0%, rgba(253, 238, 33, 0.9) 100%);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-card-modern.card-yellow:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .feature-card-modern.card-yellow .feature-title-modern {
+    color: var(--brand-black);
+  }
+
+  .feature-card-modern.card-yellow .feature-desc-modern {
+    color: rgba(0, 0, 0, 0.75);
+  }
+
+  .feature-card-modern.card-yellow .feature-icon-modern {
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    color: var(--color-accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .feature-card-modern:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-divider {
+    height: 1px;
+    width: 100%;
+  }
+
+  .feature-card-modern.card-dark .card-divider {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2) 5%, rgba(255, 255, 255, 0.2) 95%, transparent);
+  }
+
+  .feature-card-modern.card-yellow .card-divider {
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.15) 5%, rgba(0, 0, 0, 0.15) 95%, transparent);
+  }
+
   .feature-card-inner {
     display: grid;
-    grid-template-columns: 80px 1fr;
+    grid-template-columns: auto 1px 1fr;
     align-items: center;
-    width: 100%;
-    padding: 1rem 2rem;
     gap: 1.5rem;
+    padding: 1.25rem 0.75rem;
+  }
+
+  .vertical-divider {
     height: 100%;
+    width: 1px;
   }
-  @media (max-width: 600px) {
-    .feature-card-inner {
-      grid-template-columns: 60px 1fr;
-      padding: 0.75rem 1rem;
-      gap: 1rem;
-      height: auto;
-    }
-    .feature-card-modern {
-      max-width: 100%;
-      min-height: 100px;
-      height: auto;
-    }
+
+  .feature-card-modern.card-dark .vertical-divider {
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.2) 80%, transparent);
   }
+
+  .feature-card-modern.card-yellow .vertical-divider {
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.15) 20%, rgba(0, 0, 0, 0.15) 80%, transparent);
+  }
+
   .feature-icon-modern {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.2rem;
     width: 60px;
     height: 60px;
-    background: #232323;
-    border-radius: 1rem;
-    color: #fff;
-    box-shadow: 0 2px 8px rgba(64,130,32,0.10);
-    border: none;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
   }
-  .feature-card-modern.dark .feature-icon-modern {
-    background: #fff;
-    color: #408220;
-    box-shadow: 0 2px 8px rgba(253,238,33,0.10);
+
+  .feature-card-modern:hover .feature-icon-modern {
+    transform: scale(1.05);
   }
+
+  .feature-icon-modern .icon {
+    width: 30px;
+    height: 30px;
+    color: inherit;
+  }
+
   .feature-content-modern {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center; /* Center horizontally */
-    text-align: center;  /* Center text */
-    gap: 0.25rem;
-    height: 100%;
+    gap: 0.5rem;
+    text-align: left;
   }
+
   .feature-title-modern {
-    font-size: 1.35rem; /* Increased size */
-    font-weight: 800;
-    margin-bottom: 0.15rem;
-    letter-spacing: 0.01em;
-    color: #232323;
-    text-align: center;
-  }
-  .feature-card-modern.dark .feature-title-modern {
-    color: #fff;
-  }
-  .feature-desc-modern {
-    font-size: 1rem;
-    color: #232323;
+    font-size: 1.25rem;
+    font-weight: 700;
     margin: 0;
-    font-weight: 500;
-    line-height: 1.4;
-    background: none;
-    padding-top: 0.1rem;
-    text-align: center;
+    letter-spacing: -0.01em;
   }
-  .feature-card-modern.dark .feature-desc-modern {
-    color: #fff;
-    text-shadow: none;
+
+  .content-divider {
+    height: 1px;
+    width: 120px;
+    margin: 0.25rem 0;
+  }
+
+  .feature-card-modern.card-dark .content-divider {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0.3) 70%, transparent);
+  }
+
+  .feature-card-modern.card-yellow .content-divider {
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0.2) 70%, transparent);
+  }
+
+  .feature-desc-modern {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  @media (max-width: 767px) {
+    .why-choose-us {
+      padding: 2rem 1rem;
+    }
+
+    .feature-card-inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 1rem;
+      padding: 1rem 0.75rem;
+    }
+
+    .vertical-divider {
+      display: none;
+    }
+
+    .feature-icon-modern {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto;
+    }
+
+    .feature-icon-modern .icon {
+      width: 26px;
+      height: 26px;
+    }
+
+    .feature-content-modern {
+      align-items: center;
+      text-align: center;
+    }
+
+    .content-divider {
+      margin: 0 auto;
+    }
+
+    .feature-title-modern {
+      font-size: 1.1rem;
+    }
+
+    .feature-desc-modern {
+      font-size: 0.875rem;
+    }
   }
 </style>

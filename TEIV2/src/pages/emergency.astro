@@ -1,0 +1,347 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import PhoneIcon from '../assets/icons/phone.svg';
+---
+<BaseLayout title="24/7 Emergency Electrical Call-Out">
+  <PageHero 
+    title="24/7 Emergency Electrical Call-Out" 
+    subtitle="Urgent electrical issues across Scarborough, Bridlington, Hunmanby, and surrounding areas"
+    image="/teiv2/images/home/Hero1.jpg"
+    imageAlt="Emergency Electrical Services"
+  />
+  
+  <section class="emergency-page">
+    <div class="emergency-container">
+      
+      <div class="emergency-intro">
+        <p>We provide an emergency electrical call-out service across Scarborough, Bridlington, Hunmanby, and surrounding areas for urgent electrical issues that pose a potential risk to safety or property.</p>
+        <p>Electrical emergencies can occur at any time. Our priority is to offer practical guidance, assess the situation, and attend where it is safe and reasonably possible to do so.</p>
+      </div>
+
+      <div class="emergency-content">
+        
+        <div class="emergency-card">
+          <div class="section-header">
+            <div class="section-line"></div>
+            <h2 class="section-title">What Is Considered an Electrical Emergency?</h2>
+          </div>
+          <p class="card-intro">An electrical emergency may include, but is not limited to:</p>
+          <ul class="emergency-list">
+            <li>Total or partial loss of power where safety is affected</li>
+            <li>Burning smells, sparking, or signs of overheating</li>
+            <li>Tripping circuits that cannot be safely reset</li>
+            <li>Exposed or damaged electrical wiring</li>
+            <li>Electrical faults affecting essential systems</li>
+          </ul>
+          <p class="card-note">If you are unsure whether your issue is an emergency, please contact us and we will advise accordingly.</p>
+        </div>
+
+        <div class="emergency-card">
+          <div class="section-header">
+            <div class="section-line"></div>
+            <h2 class="section-title">Response Times & Availability</h2>
+          </div>
+          <p class="card-intro">We aim to respond to emergency calls as promptly as possible. However, response times may vary depending on:</p>
+          <ul class="emergency-list">
+            <li>Current workload and call volume</li>
+            <li>Location and travel time</li>
+            <li>Weather conditions or access restrictions</li>
+            <li>The nature and severity of the fault</li>
+          </ul>
+          <p class="card-note">While this is a 24/7 service, attendance cannot be guaranteed in all circumstances. Where immediate attendance is not possible, we will provide clear guidance on next steps and safety precautions.</p>
+        </div>
+
+        <div class="emergency-card emergency-card--danger">
+          <div class="section-header">
+            <div class="section-line"></div>
+            <h2 class="section-title">Safety First</h2>
+          </div>
+          <p class="card-intro-danger">If you believe there is an immediate danger to life or property:</p>
+          <ul class="emergency-list">
+            <li>Switch off the power at the consumer unit if it is safe to do so</li>
+            <li>Keep people away from the affected area</li>
+            <li>Do not touch exposed wiring or damaged equipment</li>
+            <li>If there is a fire or immediate risk, contact the emergency services first</li>
+          </ul>
+        </div>
+
+        <div class="emergency-card">
+          <div class="section-header">
+            <div class="section-line"></div>
+            <h2 class="section-title">Call-Out Charges</h2>
+          </div>
+          <p>Emergency call-outs may be subject to additional charges, including out-of-hours rates. Any applicable costs will be explained before attendance wherever possible.</p>
+        </div>
+
+        <div class="emergency-card">
+          <div class="section-header">
+            <div class="section-line"></div>
+            <h2 class="section-title">Our Service Area</h2>
+          </div>
+          <p>Emergency call-outs are available within Scarborough, Bridlington, Hunmanby, and surrounding areas. Requests outside this area may not be covered.</p>
+        </div>
+
+      </div>
+
+      <div class="emergency-contact">
+        <div class="contact-box">
+          <h3>Experiencing an Urgent Electrical Issue?</h3>
+          <p>Contact us to discuss your situation. We will assess the problem and advise on the safest and most appropriate course of action.</p>
+          <a href="tel:01723449667" class="emergency-button">
+            <PhoneIcon class="button-icon" aria-hidden="true" />
+            <span>Call 01723 449667</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .emergency-page {
+    padding: 3rem 1rem;
+    background: linear-gradient(180deg, rgba(13, 13, 14, 1) 0%, rgba(46, 46, 46, 1) 50%, rgba(13, 13, 14, 1) 100%);
+  }
+
+  .emergency-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .emergency-intro {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    text-align: center;
+  }
+
+  .emergency-intro p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1rem;
+  }
+
+  .emergency-intro p:last-child {
+    margin-bottom: 0;
+  }
+
+  .emergency-content {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .emergency-card {
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    border: 1px solid rgba(96, 96, 97, 0.3);
+    border-radius: 12px;
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .emergency-card:hover {
+    border-color: rgba(253, 238, 33, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .emergency-card--danger {
+    border-color: rgba(220, 53, 69, 0.4);
+    background: linear-gradient(135deg, rgba(60, 30, 35, 0.95) 0%, rgba(50, 25, 30, 0.95) 100%);
+  }
+
+  .emergency-card--danger:hover {
+    border-color: rgba(220, 53, 69, 0.6);
+  }
+
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .section-line {
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--color-accent) 0%,
+      var(--color-primary) 50%,
+      transparent 100%
+    );
+    margin-bottom: 1rem;
+    border-radius: 2px;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .card-intro,
+  .card-intro-danger {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .card-intro-danger {
+    font-weight: 700;
+    color: rgba(255, 200, 200, 1);
+  }
+
+  .emergency-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .emergency-list li {
+    padding: 0.75rem 0 0.75rem 2rem;
+    position: relative;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .emergency-list li:last-child {
+    border-bottom: none;
+  }
+
+  .emergency-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 900;
+    font-size: 1.2rem;
+  }
+
+  .emergency-card--danger .emergency-list li::before {
+    content: "⚠";
+    font-size: 1.1rem;
+  }
+
+  .card-note {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: rgba(253, 238, 33, 0.1);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .emergency-contact {
+    margin-top: 3rem;
+  }
+
+  .contact-box {
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    border: 2px solid var(--color-accent);
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(253, 238, 33, 0.2);
+  }
+
+  .contact-box h3 {
+    font-size: 2rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--color-accent) 0%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 1rem 0;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-box p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .emergency-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.25rem 3rem;
+    background: var(--color-accent);
+    color: var(--brand-black);
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(253, 238, 33, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .emergency-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .emergency-button:hover::before {
+    transform: translateX(0);
+  }
+
+  .emergency-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(253, 238, 33, 0.6);
+  }
+
+  .emergency-button :global(.button-icon) {
+    width: 24px;
+    height: 24px;
+    fill: var(--brand-black);
+  }
+
+  @media (min-width: 768px) {
+    .emergency-page {
+      padding: 4rem 2rem;
+    }
+
+    .emergency-content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .emergency-card:nth-child(3) {
+      grid-column: 1 / -1;
+    }
+
+    .emergency-intro {
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .emergency-page {
+      padding: 5rem 2rem;
+    }
+
+    .emergency-card {
+      padding: 3rem;
+    }
+  }
+</style>

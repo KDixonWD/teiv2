@@ -74,9 +74,11 @@ import Menu from '../assets/icons/menu.svg';
 .header {
   position: absolute;
   width: 100%;
-  background: rgba(62,62,62,0.85);
+  background: rgba(30, 30, 30, 0.92);
   padding: 1rem 0;
   z-index: 20;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== Inner Container ===== */
@@ -128,9 +130,10 @@ import Menu from '../assets/icons/menu.svg';
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.3px;
-  padding: 0.25rem 0;
+  padding: 0.5rem 0;
   position: relative;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 /* Underline hover */
@@ -138,11 +141,12 @@ import Menu from '../assets/icons/menu.svg';
   content: "";
   position: absolute;
   left: 0;
-  bottom: -0.25rem;
+  bottom: 0;
   width: 0;
   height: 3px;
   background: currentColor;
-  transition: width 0.5s ease;
+  border-radius: 3px;
+  transition: width 0.4s ease;
 }
 
 .nav-link:hover::after {
@@ -151,6 +155,12 @@ import Menu from '../assets/icons/menu.svg';
 
 .nav-link:hover {
   color: #ffffff;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 /* ===== Dropdown ===== */
@@ -178,14 +188,27 @@ import Menu from '../assets/icons/menu.svg';
   position: absolute;
   top: calc(100% + 0.75rem);
   left: 0;
-  min-width: 220px;
-  background: rgba(62, 62, 62, 0.96);
+  min-width: 240px;
+  background: rgba(30, 30, 30, 0.97);
   border: 2px solid var(--color-accent);
-  border-radius: 10px;
-  padding: 0.5rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  padding: 0.75rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(253, 238, 33, 0.1);
   display: none;
   z-index: 50;
+  backdrop-filter: blur(8px);
+  animation: dropdownFade 0.2s ease;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .nav-dropdown[open] .dropdown-panel {
@@ -194,49 +217,73 @@ import Menu from '../assets/icons/menu.svg';
 
 .dropdown-link {
   display: block;
-  padding: 0.55rem 0.75rem;
+  padding: 0.65rem 0.9rem;
   text-decoration: none;
   color: #ffffff;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 700;
+  font-size: 0.95rem;
   position: relative;
-  transition: color 0.2s ease;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+  letter-spacing: 0.2px;
 }
 
-/* Underline hover effect (matches main nav style) */
+/* Underline hover effect */
 .dropdown-link::after {
   content: "";
   position: absolute;
-  left: 0.75rem;
-  bottom: 0.35rem;
+  left: 0.9rem;
+  bottom: 0.5rem;
   width: 0;
-  height: 3px;
+  height: 2px;
   background: var(--color-accent);
-  transition: width 0.75s ease;
+  border-radius: 2px;
+  transition: width 0.4s ease;
 }
 
 .dropdown-link:hover {
   color: var(--color-accent);
+  background: rgba(253, 238, 33, 0.08);
+  transform: translateX(4px);
 }
 
 .dropdown-link:hover::after {
-  width: calc(100% - 1.5rem);
+  width: calc(100% - 1.8rem);
+}
+
+.dropdown-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 /* ===== Mobile Menu Button ===== */
 .mobile-menu-btn {
   display: none;
-  background: none;
-  border: 0;
+  background: rgba(253, 238, 33, 0.1);
+  border: 2px solid rgba(253, 238, 33, 0.3);
+  border-radius: 50%;
   padding: 0.5rem;
   cursor: pointer;
   color: var(--color-accent);
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(253, 238, 33, 0.2);
+  border-color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.mobile-menu-btn:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .mobile-menu-btn .icon {
   width: 38px;
   height: 38px;
   stroke: currentColor;
+  display: block;
 }
 
 /* ===== Breakpoints ===== */

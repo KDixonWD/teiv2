@@ -33,146 +33,234 @@ const testimonials = [
 
 <Section theme="dark">
   <div class="testimonials">
-    <SectionHeader title="What Our Clients Say" theme="dark"/>
+    <SectionHeader title="Testimonials" theme="dark"/>
     <div class="testimonials-container">
-      <div class="testimonials-swiper swiper"> <!-- Added 'swiper' class -->
+      <div class="testimonials-swiper swiper">
         <div class="swiper-wrapper">
           {testimonials.map(testimonial => (
             <div class="swiper-slide">
               <blockquote>
+                <div class="quote-mark" aria-hidden="true">"</div>
                 <p>"{testimonial.quote}"</p>
-                <div class="author" >- {testimonial.author}</div>
+                <div class="author-section">
+                  <div class="author-line"></div>
+                  <div class="author">{testimonial.author}</div>
+                </div>
               </blockquote>
             </div>
           ))}
         </div>
-        <div class="swiper-button swiper-button-prev"></div>
-        <div class="swiper-button swiper-button-next"></div>
+        <div class="swiper-button-prev" aria-label="Previous slide"></div>
+        <div class="swiper-button-next" aria-label="Next slide"></div>
       </div>
     </div>
   </div>
 </Section>
 
 <style>
-
   .testimonials-container {
-    width: 90%;
+    max-width: 1400px;
     margin: 0 auto;
-    margin-bottom: 3rem;
+    padding: 0 0 2rem 1rem;
+    overflow: hidden;
   }
 
   .testimonials-swiper {
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 2rem;
+    padding-bottom: 2rem;
+    position: relative;
   }
 
   .swiper-slide {
     height: auto;
-    width: calc(33% -20px)
-    }
-      blockquote {
+    display: flex;
+  }
+
+  blockquote {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin: 0 1.5rem;
-    background-color: #2e2e2e; /* Match Footer logo-section/section-bg */
-    padding: 1rem 2.5em;
-    border-radius: 1.5rem; /* Rounded edges */
-    color: white;
-    border-top: 2px solid #fdee21; /* Match Footer border thickness */
-    border-bottom: 2px solid #fdee21;
+    margin: 0 0.5rem;
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    padding: 2rem 1.75rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (min-width: 768px) {
+    blockquote {
+      padding: 2.25rem 2rem;
+      margin: 0 1rem;
+    }
+  }
+
+  blockquote:hover {
+    border-color: rgba(253, 238, 33, 0.25);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(253, 238, 33, 0.1);
+  }
+
+  .quote-mark {
+    display: none;
   }
 
   blockquote p {
-    font-style: italic;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.75;
     flex-grow: 1;
-    margin: 0;
+    margin: 0 0.75rem;
+    position: relative;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.88);
+    padding-top: 1rem;
   }
 
-  /* Custom scrollbar for webkit browsers */
-  blockquote p::-webkit-scrollbar {
-    width: 6px;
+  blockquote p::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--color-accent) 0%,
+      var(--color-primary) 50%,
+      transparent 100%
+    );
   }
 
-  blockquote p::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
+  @media (min-width: 768px) {
+    blockquote p {
+      font-size: 1.05rem;
+    }
   }
 
-  blockquote p::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
+  .author-section {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .author-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      270deg,
+      var(--color-accent) 0%,
+      var(--color-primary) 50%,
+      transparent 100%
+    );
   }
 
   .author {
-    margin-top: 1rem;
     text-align: right;
-    font-weight: bold;
-    color: #fdee21;
-    border-top: 2px solid #fdee21; /* Match Footer border thickness */
-    border-bottom: 2px solid #fdee21; /* Match Footer border thickness */ 
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  @media (min-width: 768px) {
+    .author {
+      font-size: 0.95rem;
+    }
   }
 
   .swiper-button-next,
   .swiper-button-prev {
-    color: #fdee21; /* Solid grey color */
-    background: none;
-    width: 50px;
-    height: 50px;
-    border: 3px solid #fdee21; /* Thicker arrows */
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    position: absolute;
+    color: var(--brand-black);
+    background: var(--color-accent);
+    backdrop-filter: blur(8px);
     top: 50%;
     transform: translateY(-50%);
+    transition: all 0.3s ease;
   }
 
   .swiper-button-next {
-    right: 0px;
+    right: 0;
   }
 
   .swiper-button-prev {
-    left: 0px;
+    left: 0;
+  }
+
+  .swiper-button-next :global(.swiper-navigation-icon),
+  .swiper-button-prev :global(.swiper-navigation-icon) {
+    width: 18px;
+    height: 18px;
+    fill: var(--brand-black);
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 18px;
+    color: var(--brand-black);
+  }
+
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--color-accent);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 16px rgba(253, 238, 33, 0.4);
+  }
+
+  .swiper-button-next:hover :global(.swiper-navigation-icon),
+  .swiper-button-prev:hover :global(.swiper-navigation-icon) {
+    fill: var(--color-accent);
+  }
+
+  .swiper-button-next:hover::after,
+  .swiper-button-prev:hover::after {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 767px) {
+    .testimonials-container {
+      padding: 2rem 1rem 4rem;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: none;
+    }
   }
 </style>
 
 <script>
   import Swiper from 'swiper';
-  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+  import { Navigation, Autoplay } from 'swiper/modules';
   import 'swiper/css/bundle';
 
   document.addEventListener('DOMContentLoaded', function() {
     new Swiper('.testimonials-swiper', {
-      modules: [Navigation, Pagination, Autoplay],
-      slidesPerView: 3,
-      spaceBetween: 30,
+      modules: [Navigation, Autoplay],
+      slidesPerView: 1,
+      spaceBetween: 20,
       loop: true,
       autoplay: {
-        delay: 6000,
+        delay: 5000,
         disableOnInteraction: false,
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
+        pauseOnMouseEnter: true,
       },
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
       breakpoints: {
-        320: {
-          slidesPerView: 1,
-          spaceBetween: 20
-        },
         768: {
           slidesPerView: 2,
-          spaceBetween: 30
-        },
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 30
+          spaceBetween: 30,
         }
       }
     });
