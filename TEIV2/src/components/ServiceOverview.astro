@@ -1,42 +1,49 @@
 ---
 import SectionHeader from './SectionHeader.astro';
+import { Image } from 'astro:assets';
+import domestic from '../assets/service-overview/Domestic.png';
+import commercial from '../assets/service-overview/Commercial.png';
+import solar from '../assets/service-overview/Solar.png';
+import ev from '../assets/service-overview/Ev.png';
+import testing from '../assets/service-overview/Testing.png';
+import emergency from '../assets/service-overview/Emergency.png';
 
 const services = [
   {
     title: 'Domestic Electrical Services',
     description: 'Safe, reliable electrical installations, upgrades, and maintenance for homes.',
-    image: '/teiv2/images/service-overview/Domestic.png',
-    link: '/services/domestic',
+    image: domestic,
+    link: '/teiv2/services/domestic',
   },
   {
     title: 'Commercial & Industrial Installations',
     description: 'Compliant electrical solutions for businesses, premises, and industrial sites.',
-    image: '/teiv2/images/service-overview/Commercial.png',
-    link: '/services/commercial',
+    image: commercial,
+    link: '/teiv2/services/commercial',
   },
   {
     title: 'Solar PV & Battery Storage',
     description: 'Design and installation of efficient solar and battery storage systems.',
-    image: '/teiv2/images/service-overview/Solar.png',
-    link: '/services/solar',
+    image: solar,
+    link: '/teiv2/services/solar',
   },
   {
     title: 'EV Charger Installation',
     description: 'Home and workplace EV charger installations, fully certified and compliant.',
-    image: '/teiv2/images/service-overview/Ev.png',
-    link: '/services/ev-chargers',
+    image: ev,
+    link: '/teiv2/services/ev-chargers',
   },
   {
     title: 'Electrical Testing & Certification',
     description: 'EICRs, landlord certificates, and compliance testing for all property types.',
-    image: '/teiv2/images/service-overview/Testing.png',
-    link: '/services/testing',
+    image: testing,
+    link: '/teiv2/services/testing',
   },
   {
     title: 'Emergency Callouts & Maintenance',
     description: 'Prompt fault finding, repairs, and ongoing electrical maintenance.',
-    image: '/teiv2/images/service-overview/Emeregency.png',
-    link: '/services/callouts',
+    image: emergency,
+    link: '/teiv2/services/callouts',
   },
 ];
 ---
@@ -54,20 +61,20 @@ const services = [
         {services.map((service, index) => (
           <>
             <a href={service.link} class="service-card">
-             
+              <div class="service-image">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  loading="lazy"
+                  decoding="async"
+                  widths={[320, 480, 640]}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              </div>
 
               <div class="service-content">
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
-                 <div class="service-image">
-                {service.image && (
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    loading="lazy"
-                  />
-                )}
-              </div>
                 <span class="service-link">Learn more</span>
               </div>
             </a>
