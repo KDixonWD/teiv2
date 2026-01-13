@@ -35,22 +35,22 @@ import LocationIcon from '../assets/icons/location.svg';
         <div class="subtitle-divider" aria-hidden="true"></div>
 
         <div class="info-items">
-          <a href="tel:01723449667" class="info-link">
+          <a href="#" class="info-link" data-contact-type="phone" data-contact="MDEzMjM0NDk2Njc=" data-display="MDE3MjMgNDQ5NjY3">
             <div class="info-link-content">
               <PhoneIcon class="info-icon" aria-hidden="true" />
               <div class="info-link-text">
                 <span class="info-label">Phone</span>
-                <span class="info-value">01723 449667</span>
+                <span class="info-value"></span>
               </div>
             </div>
           </a>
 
-          <a href="mailto:info@teielectrical.co.uk" class="info-link">
+          <a href="#" class="info-link" data-contact-type="email" data-contact="aW5mb0B0ZWktbHRkLmNvLnVr" data-display="aW5mb0B0ZWktbHRkLmNvLnVr">
             <div class="info-link-content">
               <EmailIcon class="info-icon" aria-hidden="true" />
               <div class="info-link-text">
                 <span class="info-label">Email</span>
-                <span class="info-value">info@teielectrical.co.uk</span>
+                <span class="info-value"></span>
               </div>
             </div>
           </a>
@@ -87,7 +87,10 @@ import LocationIcon from '../assets/icons/location.svg';
         <div class="divider" aria-hidden="true"></div>
 
         <div class="emergency-notice">
-          <h3>24/7 Emergency Callout</h3>
+          <div class="section-header">
+            <div class="section-line"></div>
+            <h3 class="section-title">24/7 Emergency Callout</h3>
+          </div>
           <p>Available day and night for emergency electrical issues in Scarborough, Bridlington, Hunmanby, and nearby areas.</p>
           <a href="/teiv2/emergency" class="emergency-btn">
             Emergency Services
@@ -305,8 +308,7 @@ import LocationIcon from '../assets/icons/location.svg';
     margin: 1.5rem 0;
   }
 
-  .business-hours h3,
-  .emergency-notice h3 {
+  .business-hours h3 {
     margin: 0 0 1rem 0;
     color: var(--color-accent);
     font-size: 1.25rem;
@@ -345,10 +347,31 @@ import LocationIcon from '../assets/icons/location.svg';
     text-align: right;
   }
 
+  .emergency-notice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(60, 30, 35, 0.95) 0%, rgba(50, 25, 30, 0.95) 100%);
+    border: 2px solid rgba(220, 53, 69, 0.4);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .emergency-notice:hover {
+    border-color: rgba(220, 53, 69, 0.6);
+  }
+
+  .emergency-notice .section-header {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
   .emergency-notice p {
-    color: rgba(255, 255, 255, 0.72);
+    color: rgba(255, 200, 200, 0.9);
     margin: 0 0 1.5rem 0;
     line-height: 1.65;
+    text-align: center;
   }
 
   .emergency-btn {
@@ -370,7 +393,6 @@ import LocationIcon from '../assets/icons/location.svg';
     overflow: hidden;
     width: 100%;
     max-width: 400px;
-    margin: 0 auto;
   }
 
   .emergency-btn::before {
@@ -431,4 +453,41 @@ import LocationIcon from '../assets/icons/location.svg';
     }
   }
 </style>
+
+<script>
+  // Decode and populate contact information to protect from bots
+  document.addEventListener('DOMContentLoaded', function() {
+    const contactLinks = document.querySelectorAll('[data-contact-type]');
+    
+    contactLinks.forEach(function(link) {
+      const type = link.getAttribute('data-contact-type');
+      const encodedContact = link.getAttribute('data-contact');
+      const encodedDisplay = link.getAttribute('data-display');
+      
+      if (!encodedContact || !encodedDisplay) return;
+      
+      try {
+        // Decode base64
+        const contact = atob(encodedContact);
+        const display = atob(encodedDisplay);
+        
+        // Set href
+        if (type === 'phone') {
+          link.setAttribute('href', 'tel:' + contact.replace(/\s/g, ''));
+        } else if (type === 'email') {
+          link.setAttribute('href', 'mailto:' + contact);
+        }
+        
+        // Set display text
+        const valueElement = link.querySelector('.info-value');
+        if (valueElement) {
+          valueElement.textContent = display;
+        }
+      } catch (e) {
+        console.error('Failed to decode contact info');
+      }
+    });
+  });
+</script>
+
 </BaseLayout>

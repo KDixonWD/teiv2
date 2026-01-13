@@ -1,81 +1,84 @@
 ---
 ---
-<form class="contact-form" method="post" name="contact" data-netlify="true" netlify-honeypot="bot-field" autocomplete="on">
+<form
+  class="contact-form"
+  method="post"
+  action="/"
+  name="contact"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  autocomplete="on"
+>
   <input type="hidden" name="form-name" value="contact" />
-  
+
   <!-- Honeypot field for spam protection -->
   <p class="hidden">
     <label>
-      Don't fill this out if you're human: <input name="bot-field" />
+      Don't fill this out if you're human:
+      <input name="bot-field" />
     </label>
   </p>
 
   <div class="form-message" id="formMessage" aria-live="polite"></div>
   <div class="form-divider" aria-hidden="true"></div>
-  
+
   <div class="form-field">
     <label for="name" class="form-label">
       Name <span class="required">(required)</span>
     </label>
-    <input 
-      type="text" 
-      name="name" 
+    <input
+      type="text"
+      name="name"
       id="name"
-      placeholder="Name" 
-      required 
+      placeholder="Name"
+      required
       aria-required="true"
       class="form-input"
     />
   </div>
-  
+
   <div class="form-field">
     <label for="email" class="form-label">
       Email <span class="required">(required)</span>
     </label>
-    <input 
-      type="email" 
-      name="email" 
+    <input
+      type="email"
+      name="email"
       id="email"
-      placeholder="Email" 
-      required 
+      placeholder="Email"
+      required
       aria-required="true"
       class="form-input"
     />
   </div>
-  
+
   <div class="form-field">
-    <label for="phone" class="form-label">
-      Phone
-    </label>
-    <input 
-      type="text" 
-      name="phone" 
+    <label for="phone" class="form-label">Phone</label>
+    <input
+      type="text"
+      name="phone"
       id="phone"
-      placeholder="Phone" 
+      placeholder="Phone"
       inputmode="numeric"
       class="form-input"
     />
   </div>
-  
+
   <div class="form-field">
-    <label for="postcode" class="form-label">
-      Postcode
-    </label>
-    <input 
-      type="text" 
-      name="postcode" 
+    <label for="postcode" class="form-label">Postcode</label>
+    <input
+      type="text"
+      name="postcode"
       id="postcode"
       placeholder="Postcode"
       class="form-input"
     />
   </div>
-  
+
   <div class="form-field">
-    <label for="subject" class="form-label">
-      Subject of enquiry
-    </label>
-    <select 
-      name="subject" 
+    <label for="subject" class="form-label">Subject of enquiry</label>
+    <select
+      name="subject"
       id="subject"
       aria-label="Subject of enquiry"
       class="form-select"
@@ -101,282 +104,272 @@
       <option value="Other (Please Specify In Your Enquiry)">Other (Please Specify In Your Enquiry)</option>
     </select>
   </div>
-  
+
   <div class="form-field">
     <label for="message" class="form-label">
       Tell us more about your enquiry?
     </label>
-    <textarea 
-      name="message" 
+    <textarea
+      name="message"
       id="message"
-      placeholder="Tell us more about your enquiry?" 
+      placeholder="Tell us more about your enquiry?"
       rows="6"
       class="form-textarea"
     ></textarea>
   </div>
-  
+
   <div class="form-divider" aria-hidden="true"></div>
-  
+
   <button type="submit" class="btn btn--primary">Submit</button>
 </form>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const forms = document.querySelectorAll<HTMLFormElement>('.contact-form');
-    
-    forms.forEach(form => {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const formMessage = form.querySelector<HTMLDivElement>('#formMessage');
-        const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-        
-        if (!formMessage || !submitBtn) return;
-        
-        const originalBtnText = submitBtn.textContent;
-        
-        // Show loading state
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-        formMessage.textContent = '';
-        formMessage.className = 'form-message';
-        
-        try {
-          const formData = new FormData(form);
-          
-          const response = await fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData as any).toString()
-          });
-          
-          if (response.ok) {
-            formMessage.textContent = 'Thank you! Your message has been sent successfully.';
-            formMessage.className = 'form-message form-message--success';
-            form.reset();
-            
-            // Close modal if form is in modal
-            const modal = form.closest('.contact-modal');
-            if (modal) {
-              setTimeout(() => {
-                modal.classList.remove('active');
-              }, 2000);
-            }
-          } else {
-            throw new Error('Form submission failed');
-          }
-        } catch (error) {
-          formMessage.textContent = 'Sorry, there was an error sending your message. Please try again.';
-          formMessage.className = 'form-message form-message--error';
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalBtnText;
+document.addEventListener('DOMContentLoaded', function() {
+  var forms = document.querySelectorAll('.contact-form');
+
+  forms.forEach(function(form) {
+    var htmlForm = form as HTMLFormElement;
+    htmlForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var formMessage = htmlForm.querySelector('#formMessage') as HTMLDivElement;
+      var submitBtn = htmlForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+      if (!formMessage || !submitBtn) return;
+
+      var originalBtnText = submitBtn.textContent;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      formMessage.textContent = '';
+      formMessage.className = 'form-message';
+
+      var formData = new FormData(htmlForm);
+      var params = new URLSearchParams();
+      formData.forEach(function(value, key) {
+        params.append(key, value.toString());
+      });
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      })
+      .then(function(response) {
+        if (!response.ok) throw new Error();
+        formMessage.textContent = 'Thank you! Your message has been sent successfully.';
+        formMessage.className = 'form-message form-message--success';
+        htmlForm.reset();
+
+        var modal = htmlForm.closest('.contact-modal');
+        if (modal) {
+          setTimeout(function() { modal!.classList.remove('active'); }, 2000);
         }
+      })
+      .catch(function() {
+        formMessage.textContent = 'Sorry, there was an error sending your message. Please try again.';
+        formMessage.className = 'form-message form-message--error';
+      })
+      .finally(function() {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
       });
     });
   });
+});
 </script>
 
 <style>
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: 700px;
-    margin: 0 auto;
-  }
+/* === EXACTLY YOUR ORIGINAL STYLES === */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
 
-  .hidden {
-    display: none;
-  }
+.hidden { display: none; }
 
-  .form-message {
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    transition: all 0.3s ease;
-  }
+.form-message {
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
 
-  .form-message:empty {
-    display: none;
-  }
+.form-message:empty { display: none; }
 
-  .form-message--success {
-    background: rgba(42, 145, 52, 0.2);
-    border: 2px solid var(--color-primary);
-    color: rgba(42, 145, 52, 1);
-  }
+.form-message--success {
+  background: rgba(42, 145, 52, 0.2);
+  border: 2px solid var(--color-primary);
+  color: rgba(42, 145, 52, 1);
+}
 
-  .form-message--error {
-    background: rgba(220, 53, 69, 0.2);
-    border: 2px solid rgba(220, 53, 69, 0.6);
-    color: rgba(255, 100, 115, 1);
-  }
+.form-message--error {
+  background: rgba(220, 53, 69, 0.2);
+  border: 2px solid rgba(220, 53, 69, 0.6);
+  color: rgba(255, 100, 115, 1);
+}
 
-  .form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
 
-  .form-label {
-    display: block;
-    margin-bottom: 0;
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0.2px;
-  }
+.form-label {
+  display: block;
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
+}
 
-  .required {
-    font-size: 0.8rem;
-    font-weight: normal;
-    color: rgba(255, 255, 255, 0.5);
-    margin-left: 0.25rem;
-  }
+.required {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.5);
+  margin-left: 0.25rem;
+}
 
-  .form-input,
-  .form-select,
-  .form-textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 2px solid rgba(255, 255, 255, 0.12);
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
-  }
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
 
-  .form-input::placeholder,
-  .form-select::placeholder,
-  .form-textarea::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-  }
+.form-input::placeholder,
+.form-select::placeholder,
+.form-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
 
-  .form-input:hover,
-  .form-select:hover,
-  .form-textarea:hover {
-    border-color: rgba(253, 238, 33, 0.3);
-    background: rgba(255, 255, 255, 0.08);
-  }
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover {
+  border-color: rgba(253, 238, 33, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+}
 
-  .form-input:focus,
-  .form-select:focus,
-  .form-textarea:focus {
-    outline: none;
-    border-color: var(--color-accent);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 0 3px rgba(253, 238, 33, 0.15);
-  }
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(253, 238, 33, 0.15);
+}
 
-  .form-select {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='12'%3E%3Cpath fill='%23FDEE21' fill-rule='evenodd' clip-rule='evenodd' d='M0.439453 1.49825L1.56057 0.501709L9.00001 8.87108L16.4395 0.501709L17.5606 1.49825L9.00001 11.1289L0.439453 1.49825Z'%3E%3C/path%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 16px;
-    padding-right: 3rem;
-  }
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='12'%3E%3Cpath fill='%23FDEE21' fill-rule='evenodd' clip-rule='evenodd' d='M0.439453 1.49825L1.56057 0.501709L9.00001 8.87108L16.4395 0.501709L17.5606 1.49825L9.00001 11.1289L0.439453 1.49825Z'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 16px;
+  padding-right: 3rem;
+}
 
-  .form-select option {
-    background: var(--brand-dark);
-    color: #ffffff;
-  }
+.form-select option {
+  background: var(--brand-dark);
+  color: #ffffff;
+}
 
-  .form-textarea {
-    min-height: 140px;
-    resize: vertical;
-    font-family: inherit;
-    line-height: 1.5;
-  }
+.form-textarea {
+  min-height: 140px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+}
 
-  .form-divider {
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2) 20%,
-      rgba(255, 255, 255, 0.2) 80%,
-      transparent
-    );
-    margin: 0.5rem 0 0 0;
-  }
+.form-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.2) 80%,
+    transparent
+  );
+  margin: 0.5rem 0 0 0;
+}
 
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  border: 2px solid transparent;
+  text-decoration: none;
+  font-family: inherit;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  align-self: center;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.btn:hover::before {
+  transform: translateX(0);
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--brand-black);
+  box-shadow: 0 4px 16px rgba(253, 238, 33, 0.4);
+}
+
+.btn--primary:hover {
+  background: var(--color-accent);
+  box-shadow: 0 6px 24px rgba(253, 238, 33, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
   .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 3rem;
-    border-radius: 50px;
-    border: 2px solid transparent;
-    text-decoration: none;
-    font-family: inherit;
-    cursor: pointer;
+    padding: 0.75rem 1.5rem;
     font-size: 1.05rem;
-    font-weight: 900;
-    letter-spacing: 0.3px;
-    transition: all 0.3s ease;
-    align-self: center;
-    width: 100%;
-    max-width: 400px;
-    position: relative;
-    overflow: hidden;
   }
+}
 
-  .btn::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
+:global(.bg-contrast) .form-label,
+:global(.bg-primary) .form-label {
+  color: #ffffff;
+}
 
-  .btn:hover::before {
-    transform: translateX(0);
-  }
-
-  .btn--primary {
-    background: var(--color-accent);
-    color: var(--brand-black);
-    box-shadow: 0 4px 16px rgba(253, 238, 33, 0.4);
-  }
-
-  .btn--primary:hover {
-    background: var(--color-accent);
-    box-shadow: 0 6px 24px rgba(253, 238, 33, 0.5);
-    transform: translateY(-2px);
-  }
-
-  .btn--primary:active {
-    transform: translateY(0);
-  }
-
-  .btn--primary:active {
-    transform: translateY(0);
-  }
-
-  @media (min-width: 768px) {
-    .btn {
-      padding: 0.75rem 1.5rem;
-      font-size: 1.05rem;
-    }
-  }
-
-  /* Match dark section styles if placed on dark background */
-  :global(.bg-contrast) .form-label,
-  :global(.bg-primary) .form-label {
-    color: #ffffff;
-  }
-
-  :global(.bg-contrast) .required,
-  :global(.bg-primary) .required {
-    color: rgba(255, 255, 255, 0.75);
-  }
+:global(.bg-contrast) .required,
+:global(.bg-primary) .required {
+  color: rgba(255, 255, 255, 0.75);
+}
 </style>

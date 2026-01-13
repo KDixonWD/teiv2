@@ -7,13 +7,14 @@ interface Props {
   subtitle?: string;
   image?: any;
   imageAlt?: string;
+  lightningPathcolour?: string;
 }
 
-const { title, subtitle, image, imageAlt = '' } = Astro.props;
+const { title, subtitle, image, imageAlt = '', lightningPathcolour = '#FFF' } = Astro.props;
 const isImageString = typeof image === 'string';
 ---
 
-<Section theme="light" lightningPathcolour="#FFF">
+<Section theme="light" lightningPathcolour={lightningPathcolour}>
   <div class="page-hero">
     {image && (
       <div class="hero-image-wrapper">

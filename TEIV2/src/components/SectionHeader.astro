@@ -52,4 +52,10 @@ const { title, theme = 'dark' } = Astro.props as Props;
     color: var(--brand-dark);
     letter-spacing: 0.2px;
   }
+
+  @media (max-width: 768px) {
+    .section-header h2 {
+      font-size: 1.7rem;
+    }
+  }
 </style>

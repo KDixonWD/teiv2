@@ -1,0 +1,308 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+const services = [
+  {
+    title: 'Domestic Electrical Services',
+    description: 'Safe, reliable electrical installations, upgrades, and maintenance for homes.',
+    image: '/teiv2/images/service-overview/Domestic.png',
+    link: '/services/domestic',
+  },
+  {
+    title: 'Commercial & Industrial Installations',
+    description: 'Compliant electrical solutions for businesses, premises, and industrial sites.',
+    image: '/teiv2/images/service-overview/Commercial.png',
+    link: '/services/commercial',
+  },
+  {
+    title: 'Solar PV & Battery Storage',
+    description: 'Design and installation of efficient solar and battery storage systems.',
+    image: '/teiv2/images/service-overview/Solar.png',
+    link: '/services/solar',
+  },
+  {
+    title: 'EV Charger Installation',
+    description: 'Home and workplace EV charger installations, fully certified and compliant.',
+    image: '/teiv2/images/service-overview/Ev.png',
+    link: '/services/ev-chargers',
+  },
+  {
+    title: 'Electrical Testing & Certification',
+    description: 'EICRs, landlord certificates, and compliance testing for all property types.',
+    image: '/teiv2/images/service-overview/Testing.png',
+    link: '/services/testing',
+  },
+  {
+    title: 'Emergency Callouts & Maintenance',
+    description: 'Prompt fault finding, repairs, and ongoing electrical maintenance.',
+    image: '/teiv2/images/service-overview/Emeregency.png',
+    link: '/services/callouts',
+  },
+];
+---
+
+<section class="quick-services">
+  <div class="container">
+    <div class="services-card-wrapper">
+      <div class="services-header-wrapper">
+        <SectionHeader title="Our Electrical Services" theme="dark" />
+        <p class="services-header-description">
+          Professional electrical services for domestic, commercial, and renewable projects across North Yorkshire.
+        </p>
+      </div>
+      <div class="services-grid">
+        {services.map((service, index) => (
+          <>
+            <a href={service.link} class="service-card">
+             
+
+              <div class="service-content">
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+                 <div class="service-image">
+                {service.image && (
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    loading="lazy"
+                  />
+                )}
+              </div>
+                <span class="service-link">Learn more</span>
+              </div>
+            </a>
+            {index < services.length - 1 && <div class="service-divider"></div>}
+          </>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .quick-services {
+    padding: 4rem 1rem;
+    background: var(--brand-dark);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+
+  .services-header-wrapper {
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    padding: 2.5rem 2rem 2rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 0;
+  }
+
+  .services-header-wrapper :global(.section-header h2) {
+    color: #fff;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+
+  .services-header-description {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.6;
+    margin: 0.75rem 0 0 0;
+    text-align: center;
+  }
+
+  .services-card-wrapper {
+    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    border: 1px solid rgba(96, 96, 97, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .services-grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .service-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    min-width: 0;
+    background: none;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    flex-basis: calc(33.333% - 2px);
+  }
+
+  .service-divider {
+    width: 1px;
+    align-self: stretch;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 10%,
+      rgba(255, 255, 255, 0.2) 90%,
+      transparent 100%
+    );
+  }
+  .service-divider {
+    width: 1px;
+    align-self: stretch;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 10%,
+      rgba(255, 255, 255, 0.2) 90%,
+      transparent 100%
+    );
+  }
+
+  .service-image {
+    width: 100%;
+    height: 180px;
+    background: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:nth-of-type(4) .service-image img {
+    object-fit: fit;
+    object-position: 70% center;
+    transform: scale(1);
+  }
+
+  .service-card:hover .service-image img {
+    transform: scale(1.05);
+  }
+
+
+  .service-content {
+    padding: 0.5rem 0 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+  }
+
+  .service-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--color-accent) 0%,
+      var(--color-primary) 50%,
+      transparent 100%
+    );
+  }
+
+  .service-image {
+    width: 100%;
+    height: 180px;
+    background: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .service-content h3 {
+    margin: 0rem 0 0.75rem 0;
+    font-size: 1rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+  }
+
+  .service-content p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+    margin-top: auto;
+  }
+
+  .service-link {
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .service-link::after {
+    content: "→";
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 768px) {
+    .quick-services {
+      padding: 3rem 1rem;
+    }
+
+    .services-grid {
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+
+    .service-card {
+      flex-basis: auto;
+    }
+
+    .service-divider {
+      width: auto;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.2) 10%,
+        rgba(255, 255, 255, 0.2) 90%,
+        transparent 100%
+      );
+    }
+
+    .service-image {
+      height: 140px;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+    }
+
+    .section-header p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .quick-services {
+      padding: 5rem 2rem;
+    }
+
+   
+  }
+</style>

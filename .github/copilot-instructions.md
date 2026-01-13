@@ -1,48 +1,121 @@
-This repository contains an Astro-based static site located in the `TEIV2/` subfolder. Use these focused guidelines when making changes or creating new code.
+This repository contains an Astro-based static site for TEI Electrical located in the `TEIV2/` subfolder. Use these focused guidelines when making changes or creating new code.
 
-- Project root: work primarily inside `TEIV2/` — that's the Astro site.
-- Start/dev/build: run commands from `TEIV2/`:
-  - `npm install`
-  - `npm run dev` (local dev server)
-  - `npm run build` (production build)
+## Project Setup & Commands
+- **Project root**: Work primarily inside `TEIV2/` — that's the Astro site
+- **Start/dev/build**: Run commands from `TEIV2/`:
+  - `npm install` — Install dependencies
+  - `npm run dev` — Start local dev server (localhost:4321)
+  - `npm run build` — Build production site to `./dist/`
+  - Always test changes with `npm run dev` before committing
 
-- Key files to inspect before editing:
-  - `TEIV2/astro.config.mjs` — site `base` and `site` are set here (`base: '/teiv2/'`).
-  - `TEIV2/package.json` — scripts and Astro version (v5.x).
-  - `TEIV2/src/pages/` — page routes (each `.astro` file maps to a route).
-  - `TEIV2/src/components/` — UI components (e.g., `Header.astro`, `Hero.astro`).
-  - `public/` and `TEIV2/src/assets/` — static images and icons. `src/assets` files are imported in components; `public/` is for static files served as-is.
-  - `public/styles/global.css` — global styles and CSS variables used across components.
+## Key Files & Structure
+- `TEIV2/astro.config.mjs` — Site `base: '/teiv2/'` and `site` URL for GitHub Pages deployment
+- `TEIV2/src/pages/` — Page routes (each `.astro` file = route, e.g., `contact.astro` → `/teiv2/contact`)
+- `TEIV2/src/components/` — Reusable UI components
+- `TEIV2/src/layouts/BaseLayout.astro` — Main layout wrapper (includes Header, Footer, WhyChooseUs, Testimonials, ContactModal)
+- `TEIV2/public/` — Static assets served as-is (images, favicon, global.css)
+- `TEIV2/src/assets/` — Bundled assets imported in components
+- `TEIV2/public/styles/global.css` — CSS variables and global styles
 
-- Routing and links:
-  - Many templates use absolute paths prefixed with `/teiv2/` (see `src/components/Header.astro`). Keep this pattern when editing links unless you're intentionally changing `astro.config.mjs` `base`.
-  - To add a page, create `TEIV2/src/pages/<name>.astro`; link from nav using the same `/teiv2/<name>` pattern or a relative link consistent with other pages.
+## Routing & Links
+- **CRITICAL**: All internal links use absolute paths prefixed with `/teiv2/` (see `Header.astro`, `Footer.astro`)
+- To add a page: Create `TEIV2/src/pages/<name>.astro` and link using `/teiv2/<name>`
+- Never change `base` in `astro.config.mjs` without updating all links site-wide
 
-- Component patterns and conventions to follow:
-  - Components are plain `.astro` files combining frontmatter, markup, inline `<style>` and inline `<script>` blocks (see `Header.astro`). Keep related CSS/JS scoped inside the component unless the change affects global layout.
-  - Images are sometimes imported (example: `import logoUrl from '../assets/global/TEI_logo.png'`) — prefer asset imports when the image is inside `src/assets/` so bundling works.
-  - Accessibility is used (ARIA attributes on nav and mobile controls). Preserve `aria-*` attributes and semantic elements when refactoring.
+## Component Architecture Patterns
+- **Standard page structure**: Import `BaseLayout` → use `PageHero` for non-index pages → add sections
+- **Section headers**: Use `SectionHeader.astro` component OR inline pattern:
+  ```astro
+  <div class="section-header">
+    <div class="section-line"></div>
+    <h2 class="section-title">Title</h2>
+  </div>
+  ```
+- **Section line**: 3px yellow-to-green gradient: `linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 50%, transparent 100%)`
+- **Section wrapper**: Use `Section.astro` component for consistent lightning SVG decorations and theme control
+- **Hero patterns**: `Hero.astro` (carousel for index) vs `PageHero.astro` (static hero for subpages)
 
-- Build/deploy considerations:
-  - `astro.config.mjs` sets `base: '/teiv2/'` and `site` for GitHub Pages — do not change base unless changing the deployment target.
-  - When testing local dev, run `npm run dev` from `TEIV2/`. Built output lives in `dist/` after `npm run build` and will include `base` in URLs.
+## Design System & Styling
+### Color Tokens (from `global.css`)
+```css
+--brand-dark: #606061 (grey)
+--brand-yellow: #FDEE21 (accent)
+--brand-green: #2A9134 (primary)
+--brand-green-deep: #054A29
+--brand-black: #0D0D0E
+```
+- Use `var(--color-accent)` for yellow, `var(--color-primary)` for green
+- Never hardcode colors — always use CSS variables
 
-- Coding style notes (discoverable patterns):
-  - Small, self-contained components live in `src/components/`; page-level composition is in `src/pages/`.
-  - Dropdowns use `<details>` + `summary` and custom scripts to enforce one-open-at-a-time behavior (see `Header.astro`).
-  - Navigation links use strong BEM-like classes (`nav-item`, `nav-link`, etc.) and CSS variables for colors — prefer reusing existing variables in `global.css`.
+### Typography & Gradients
+- **Font stack**: 'Roboto', system-ui, -apple-system (from global.css)
+- **White gradient text** (section titles):
+  ```css
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  ```
+- **Yellow-to-white gradient** (emphasis):
+  ```css
+  background: linear-gradient(135deg, var(--color-accent) 0%, #ffffff 100%);
+  ```
 
-- When making edits:
-  - Run `npm run dev` and open the local server to verify visual changes.
-  - Check console output for Astro build errors (incorrect imports, missing assets, or JSX-like syntax in `.astro` frontmatter).
-  - Keep changes minimal and isolated to the component/page unless a cross-cutting change is required.
+### Dark Theme Cards (Footer, Contact, Emergency)
+- **Background**: `linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%)`
+- **Border**: `1px solid rgba(96, 96, 97, 0.3)` — hover: `rgba(253, 238, 33, 0.3)`
+- **Text colors**: White at 85-95% opacity for body, 50% for labels
+- **Danger variant** (emergency): Red-tinted background `rgba(60, 30, 35, 0.95)`, border `rgba(220, 53, 69, 0.4)`
 
-- Styles / colors (important):
-  - Primary global stylesheet: `public/styles/global.css`.
-  - The project uses CSS custom properties for theming (example seen in `Header.astro`: `--color-accent`). Prefer reusing existing variables rather than hard-coding colors in components.
-  - To change a site-wide color, update the variable in `public/styles/global.css` (search for `:root` or the variables block).
-  - Component-scoped styles exist inside `.astro` components. For layout-wide changes (spacing, breakpoints, colors) prefer `global.css` so changes cascade consistently.
-  - When adding new variables, use a clear name (`--color-accent`, `--color-bg-muted`) and add a short comment in `global.css` to explain usage.
-  - Example: `Header.astro` applies `var(--color-accent)` to navigation elements and icons — changing that variable will update the header theme.
+### Button Styling
+- **Primary button**: Yellow background (`var(--color-accent)`), black text, rounded (`border-radius: 50px`)
+- **Hover effect**: Slide-in overlay using `::before` pseudo-element with `transform: translateX(-100%)`
+- **Shadow**: `box-shadow: 0 4px 16px rgba(253, 238, 33, 0.4)`
+- See `ContactForm.astro` button for reference implementation
 
-If anything here is unclear or you want me to add deployment steps or testing commands, tell me which areas to expand.
+## Component Conventions
+- **Scoped styles**: Keep CSS inside `<style>` blocks unless it affects global layout
+- **Scripts**: Use TypeScript-aware vanilla JS with proper type assertions:
+  ```typescript
+  const form = document.querySelector<HTMLFormElement>('.contact-form');
+  if (!form) return;
+  ```
+- **Asset imports**: Import images from `src/assets/` for bundling: `import logoUrl from '../assets/global/TEI_logo.png'`
+- **SVG icons**: Import and use as components: `import PhoneIcon from '../assets/icons/phone.svg'` → `<PhoneIcon class="icon" />`
+- **Accessibility**: Always include ARIA attributes (`aria-label`, `aria-hidden`, `role`) on interactive elements
+
+## Form Handling (Netlify Forms)
+- `ContactForm.astro` and `ContactModal.astro` use Netlify Forms
+- Required attributes: `data-netlify="true"`, `netlify-honeypot="bot-field"`, hidden `form-name` field
+- JS handles submission with fetch POST to `/` as `application/x-www-form-urlencoded`
+- Success/error messages styled with `.form-message--success` / `.form-message--error`
+
+## Layout Components
+- **BaseLayout**: Auto-includes Header, Footer, WhyChooseUs, Testimonials, ContactModal on every page
+- **ContactModal**: Triggered site-wide via `data-open-contact-modal` attribute on buttons
+- **Mobile nav**: Slide-in panel from right, uses `details`/`summary` for dropdowns with one-open-at-a-time JS enforcement
+
+## Responsive Breakpoints
+- Mobile-first approach
+- Key breakpoint: `768px` for two-column layouts
+- Large screens: `1024px` for expanded spacing/padding
+- Max container width: `1200px`
+
+## TypeScript Considerations
+- Astro components support TS in frontmatter and script blocks
+- Always type-cast DOM queries: `querySelector<HTMLElement>`, `querySelector<HTMLFormElement>`
+- Use null checks before accessing properties: `if (!element) return;`
+- Non-null assertions (`element!`) only when already checked in parent scope
+
+## Common Pitfalls
+- ❌ Don't forget `/teiv2/` prefix on internal links
+- ❌ Don't hardcode colors — use CSS variables
+- ❌ Don't mix `public/` static paths with `src/assets/` imports
+- ❌ Don't skip `aria-*` attributes on interactive elements
+- ❌ Don't use `var` — use `const`/`let` in scripts
+- ✅ Always test with `npm run dev` before pushing
+- ✅ Check browser console for Astro build errors
+
+## Deployment
+- Target: GitHub Pages (hence `base: '/teiv2/'`)
+- Forms require Netlify deployment for backend processing
+- Build output: `TEIV2/dist/` after `npm run build`

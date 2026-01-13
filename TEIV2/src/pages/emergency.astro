@@ -5,9 +5,9 @@ import PhoneIcon from '../assets/icons/phone.svg';
 ---
 <BaseLayout title="24/7 Emergency Electrical Call-Out">
   <PageHero 
-    title="24/7 Emergency Electrical Call-Out" 
-    subtitle="Urgent electrical issues across Scarborough, Bridlington, Hunmanby, and surrounding areas"
-    image="/teiv2/images/home/Hero1.jpg"
+    title="24/7 Emergency Electrical Assitance" 
+    lightningPathcolour="var(--color-accent)"
+    image="/teiv2/images/emergency/Emergency-Hero.jpeg"
     imageAlt="Emergency Electrical Services"
   />
   
@@ -100,9 +100,14 @@ import PhoneIcon from '../assets/icons/phone.svg';
 </BaseLayout>
 
 <style>
+  /* Move hero image up */
+  :global(.page-hero .hero-image) {
+    object-position: center 30%;
+  }
+
   .emergency-page {
-    padding: 3rem 1rem;
-    background: linear-gradient(180deg, rgba(13, 13, 14, 1) 0%, rgba(46, 46, 46, 1) 50%, rgba(13, 13, 14, 1) 100%);
+    padding: 2rem 1rem;
+    background: #606061;
   }
 
   .emergency-container {
@@ -112,7 +117,7 @@ import PhoneIcon from '../assets/icons/phone.svg';
 
   .emergency-intro {
     max-width: 900px;
-    margin: 0 auto 3rem;
+    margin: 0 auto 2rem;
     text-align: center;
   }
 
@@ -129,15 +134,15 @@ import PhoneIcon from '../assets/icons/phone.svg';
 
   .emergency-content {
     display: grid;
-    gap: 2rem;
-    margin-bottom: 3rem;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   .emergency-card {
-    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    background: rgba(46, 46, 46, 0.95);
     border: 1px solid rgba(96, 96, 97, 0.3);
     border-radius: 12px;
-    padding: 2.5rem;
+    padding: 2rem;
     transition: all 0.3s ease;
   }
 
@@ -148,8 +153,8 @@ import PhoneIcon from '../assets/icons/phone.svg';
   }
 
   .emergency-card--danger {
-    border-color: rgba(220, 53, 69, 0.4);
-    background: linear-gradient(135deg, rgba(60, 30, 35, 0.95) 0%, rgba(50, 25, 30, 0.95) 100%);
+    border: 2px solid rgba(220, 53, 69, 0.4);
+    background: rgba(60, 30, 35, 0.95);
   }
 
   .emergency-card--danger:hover {
@@ -181,6 +186,10 @@ import PhoneIcon from '../assets/icons/phone.svg';
     background-clip: text;
     margin: 0;
     letter-spacing: 0.5px;
+  }
+
+  .emergency-card p {
+    color: rgba(255, 255, 255, 0.9);
   }
 
   .card-intro,
@@ -240,14 +249,14 @@ import PhoneIcon from '../assets/icons/phone.svg';
   }
 
   .emergency-contact {
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 
   .contact-box {
-    background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(38, 38, 38, 0.95) 100%);
+    background: rgba(46, 46, 46, 0.95);
     border: 2px solid var(--color-accent);
     border-radius: 12px;
-    padding: 3rem;
+    padding: 2.5rem;
     text-align: center;
     box-shadow: 0 8px 32px rgba(253, 238, 33, 0.2);
   }
@@ -255,10 +264,7 @@ import PhoneIcon from '../assets/icons/phone.svg';
   .contact-box h3 {
     font-size: 2rem;
     font-weight: 900;
-    background: linear-gradient(135deg, var(--color-accent) 0%, #ffffff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-accent);
     margin: 0 0 1rem 0;
     letter-spacing: 0.5px;
   }
