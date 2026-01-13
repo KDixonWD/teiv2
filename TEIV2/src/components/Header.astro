@@ -1,6 +1,7 @@
 ---
 import TopBar from './Common/Header/TopBar.astro';
 import MobileNav from './Common/Header/MobileNav.astro';
+import { Image } from 'astro:assets';
 import logoUrl from '../assets/global/TEI_logo.png';
 import Menu from '../assets/icons/menu.svg';
 ---
@@ -11,7 +12,14 @@ import Menu from '../assets/icons/menu.svg';
   <div class="header-inner">
     <div class="logo">
       <a href="/teiv2/home">
-        <img src={logoUrl.src} alt="TEI Electrical Logo" />
+        <Image 
+          src={logoUrl} 
+          alt="TEI Electrical Logo"
+          loading="eager"
+          fetchpriority="high"
+          widths={[150, 200, 300]}
+          sizes="(max-width: 768px) 100px, 150px"
+        />
       </a>
     </div>
 

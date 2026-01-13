@@ -4,10 +4,11 @@ $imagePath = "public\images\service-overview"
 $outputPath = "src\assets\service-overview"
 $magickPath = "C:\Program Files\ImageMagick-7.1.2-Q16-HDRI\magick.exe"
 $images = @("Commercial.png", "Domestic.png", "Emeregency.png", "Ev.png", "Solar.png", "Testing.png")
+
+# Only create 2 sizes: 300w (mobile) and 600w (desktop 2x)
 $sizes = @(
-    @{w=640; h=640; suffix="640w"},
-    @{w=480; h=480; suffix="480w"},
-    @{w=320; h=320; suffix="320w"}
+    @{w=600; h=600; suffix="600w"},
+    @{w=300; h=300; suffix="300w"}
 )
 
 # Create output directory if it doesn't exist
@@ -15,7 +16,7 @@ if (!(Test-Path $outputPath)) {
     New-Item -ItemType Directory -Path $outputPath | Out-Null
 }
 
-Write-Host "Resizing service overview images..." -ForegroundColor Green
+Write-Host "Resizing service overview images (2 sizes only)..." -ForegroundColor Green
 
 foreach ($image in $images) {
     $inputFile = Join-Path $imagePath $image
@@ -36,11 +37,10 @@ foreach ($image in $images) {
         & $magickPath $cmd
     }
     
-    # Also copy original to assets folder
+    # Copy original
     $originalOutput = Join-Path $outputPath $image
     Copy-Item $inputFile $originalOutput -Force
     Write-Host "  Copied: $image"
 }
 
 Write-Host "Done!" -ForegroundColor Green
-Write-Host "Images saved to: $outputPath" -ForegroundColor Yellow
