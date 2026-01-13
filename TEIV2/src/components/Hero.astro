@@ -87,6 +87,22 @@ const slides = [
   .swiper-slide {
     position: relative;
     height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Show first slide immediately before Swiper loads */
+  .swiper-slide:first-child {
+    opacity: 1;
+  }
+
+  /* After Swiper initializes, show active slides */
+  .swiper-initialized .swiper-slide {
+    opacity: 0;
+  }
+
+  .swiper-initialized .swiper-slide-active {
+    opacity: 1;
   }
 
   .slide-image {
