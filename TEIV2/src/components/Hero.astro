@@ -351,16 +351,17 @@ const slides = [
   
 </style>
 
-<script is:inline>
-  let swiper;
+<script>
+  let swiper: any = null;
+  let swiperInitialized = false;
 
-  const preloadNext = (n) => {
+  const preloadNext = (n: number): void => {
     if (!swiper || !swiper.slides) return;
-    const slides = Array.from(swiper.slides);
+    const slides = Array.from(swiper.slides) as Element[];
     slides
       .slice(swiper.activeIndex, swiper.activeIndex + n + 1)
-      .forEach((slide) => {
-        const img = slide.querySelector('img');
+      .forEach((slide: Element) => {
+        const img = slide.querySelector('img') as HTMLImageElement | null;
         if (img) img.setAttribute('loading', 'eager');
       });
   };
@@ -371,7 +372,7 @@ const slides = [
 
     if (root.dataset.swiperInit === 'true') return;
     root.dataset.swiperInit = 'true';
-    window.swiperInitialized = true;
+    swiperInitialized = true;
 
     const paginationEl = root.querySelector('.swiper-pagination');
     const nextEl = root.querySelector('.swiper-button-next');
@@ -381,7 +382,7 @@ const slides = [
     if (!(nextEl instanceof HTMLElement)) return;
     if (!(prevEl instanceof HTMLElement)) return;
 
-    // Dynamically import Swiper after critical content loads
+    // Dynamically import Swiper only when needed
     const [{ default: Swiper }, { Navigation, Pagination, Autoplay }] = await Promise.all([
       import('swiper'),
       import('swiper/modules')
@@ -396,24 +397,25 @@ const slides = [
       speed: 600,
     });
 
-    // Preload upcoming slides on slide change
     swiper.on('slideChange', () => preloadNext(2));
     preloadNext(2);
   };
 
-  // Defer Swiper init to idle time, not critical path
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => initHeroSwiper(), { timeout: 2000 });
-  } else {
-    setTimeout(initHeroSwiper, 500);
-  }
-
+  // Only load Swiper after user interaction or long idle
   document.addEventListener('astro:page-load', () => {
-    if (window.swiperInitialized) return;
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => initHeroSwiper(), { timeout: 2000 });
-    } else {
-      setTimeout(initHeroSwiper, 500);
-    }
+    if (swiperInitialized) return;
+    // Wait 3 seconds then load if not interactive
+    setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => initHeroSwiper());
+      } else {
+        initHeroSwiper();
+      }
+    }, 3000);
   });
+
+  // Preload on interaction
+  document.addEventListener('click', () => {
+    if (!swiperInitialized) initHeroSwiper();
+  }, { once: true });
 </script>
