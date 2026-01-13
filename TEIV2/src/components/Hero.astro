@@ -39,14 +39,16 @@ const slides = [
     <div class="hero-swiper swiper">
       <div class="swiper-wrapper">
         {
-          slides.map((slide) => (
+          slides.map((slide, index) => (
             <div class="swiper-slide">
               <Image
                 src={slide.image}
                 alt={slide.alt}
                 class="slide-image"
-                loading="eager"
+                loading={index === 0 ? "eager" : "lazy"}
                 decoding="async"
+                widths={[640, 768, 1024, 1280, 1920, 2560]}
+                sizes="100vw"
               />
 
               <div class="carousel-caption">
@@ -105,9 +107,9 @@ const slides = [
     height: 46px;
     border-radius: 50%;
     color: var(--color-accent);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     border: var(--color-primary)
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(4px);
     top: 65%;
     transform: translateY(-50%);
     transition: all 0.3s ease;
@@ -149,8 +151,8 @@ const slides = [
     padding: 0.5rem 0.75rem;
     border-radius: 50px;
 
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   }
 
@@ -198,7 +200,7 @@ const slides = [
 
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
     border: solid 2px var(--color-accent);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(6px);
   }
 
   .carousel-caption h2 {
@@ -348,11 +350,21 @@ const slides = [
 </style>
 
 <script>
-  import Swiper from 'swiper';
-  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-  import 'swiper/css/bundle';
+    import 'swiper/css/bundle';
+  let swiper: any;
 
-  const initHeroSwiper = () => {
+  const preloadNext = (n: number) => {
+    if (!swiper || !swiper.slides) return;
+    const slides = Array.from(swiper.slides) as Element[];
+    slides
+      .slice(swiper.activeIndex, swiper.activeIndex + n + 1)
+      .forEach((slide: Element) => {
+        const img = slide.querySelector<HTMLImageElement>('img');
+        if (img) img.setAttribute('loading', 'eager');
+      });
+  };
+
+  const initHeroSwiper = async () => {
     const root = document.querySelector('.hero-swiper');
     if (!(root instanceof HTMLElement)) return;
 
@@ -367,15 +379,36 @@ const slides = [
     if (!(nextEl instanceof HTMLElement)) return;
     if (!(prevEl instanceof HTMLElement)) return;
 
-    new Swiper(root, {
+    // Dynamically import Swiper after critical content loads
+    const [{ default: Swiper }, { Navigation, Pagination, Autoplay }] = await Promise.all([
+      import('swiper'),
+      import('swiper/modules')
+    ]);
+
+    swiper = new Swiper(root, {
       modules: [Navigation, Pagination, Autoplay],
       loop: true,
       autoplay: { delay: 5000, disableOnInteraction: false },
       pagination: { el: paginationEl, clickable: true },
       navigation: { nextEl, prevEl },
+      speed: 600,
     });
+
+    // Preload upcoming slides on slide change
+    swiper.on('slideChange', () => preloadNext(2));
+    preloadNext(2);
   };
 
-  document.addEventListener('DOMContentLoaded', initHeroSwiper);
-  document.addEventListener('astro:page-load', initHeroSwiper);
+  // Use requestIdleCallback for better performance, fallback to setTimeout
+  const scheduleInit = () => {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => initHeroSwiper(), { timeout: 2000 });
+    } else {
+      setTimeout(initHeroSwiper, 100);
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', scheduleInit);
+  document.addEventListener('astro:page-load', scheduleInit);
+  window.addEventListener('load', () => preloadNext(2));
 </script>
