@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Section from './Section.astro';
+import 'swiper/css/bundle';
 
 import slide1 from '../assets/hero-carousel/slide1.jpg';
 import slide2 from '../assets/hero-carousel/slide2.jpg';
@@ -350,17 +351,16 @@ const slides = [
   
 </style>
 
-<script>
-    import 'swiper/css/bundle';
-  let swiper: any;
+<script is:inline>
+  let swiper;
 
-  const preloadNext = (n: number) => {
+  const preloadNext = (n) => {
     if (!swiper || !swiper.slides) return;
-    const slides = Array.from(swiper.slides) as Element[];
+    const slides = Array.from(swiper.slides);
     slides
       .slice(swiper.activeIndex, swiper.activeIndex + n + 1)
-      .forEach((slide: Element) => {
-        const img = slide.querySelector<HTMLImageElement>('img');
+      .forEach((slide) => {
+        const img = slide.querySelector('img');
         if (img) img.setAttribute('loading', 'eager');
       });
   };
@@ -371,6 +371,7 @@ const slides = [
 
     if (root.dataset.swiperInit === 'true') return;
     root.dataset.swiperInit = 'true';
+    window.swiperInitialized = true;
 
     const paginationEl = root.querySelector('.swiper-pagination');
     const nextEl = root.querySelector('.swiper-button-next');
@@ -400,16 +401,19 @@ const slides = [
     preloadNext(2);
   };
 
-  // Use requestIdleCallback for better performance, fallback to setTimeout
-  const scheduleInit = () => {
+  // Defer Swiper init to idle time, not critical path
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => initHeroSwiper(), { timeout: 2000 });
+  } else {
+    setTimeout(initHeroSwiper, 500);
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    if (window.swiperInitialized) return;
     if ('requestIdleCallback' in window) {
       requestIdleCallback(() => initHeroSwiper(), { timeout: 2000 });
     } else {
-      setTimeout(initHeroSwiper, 100);
+      setTimeout(initHeroSwiper, 500);
     }
-  };
-
-  document.addEventListener('DOMContentLoaded', scheduleInit);
-  document.addEventListener('astro:page-load', scheduleInit);
-  window.addEventListener('load', () => preloadNext(2));
+  });
 </script>
