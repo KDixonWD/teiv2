@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 
-import logoUrl from '../assets/global/TEI_logo.png';
+import Logo from './Logo.astro';
 import yellLogoUrl from '../assets/global/Yell-Reviews-Logo.png';
 
 /* Footer brand bar background */
@@ -34,15 +34,7 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <div class="brand-bar-inner">
-      <a href="/teiv2/home" class="brand-bar-link" aria-label="Go to homepage">
-        <Image
-          src={logoUrl}
-          alt="TEI Electrical Logo"
-          class="brand-bar-logo"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
+      <Logo href="/teiv2/" loading="lazy" decoding="async" class="brand-bar-logo" />
 
       <p class="brand-bar-tagline">
         Domestic, commercial and renewable electrical services across North Yorkshire.
@@ -327,22 +319,6 @@ const currentYear = new Date().getFullYear();
       padding: 2.4rem 0;
       
     }
-  }
-
-  .brand-bar-link {
-    display: inline-flex;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-    border-radius: 12px;
-  }
-
-  .brand-bar-link:hover {
-    transform: scale(1.05);
-  }
-
-  .brand-bar-link:focus-visible {
-    outline: 3px solid var(--color-accent);
-    outline-offset: 8px;
   }
 
   .brand-bar-logo {

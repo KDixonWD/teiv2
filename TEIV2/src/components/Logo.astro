@@ -1,0 +1,84 @@
+---
+import { Image } from 'astro:assets';
+import logoUrl from '../assets/global/TEI_logo.png';
+
+interface Props {
+  href?: string;
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'auto' | 'low';
+  decoding?: 'async' | 'auto' | 'sync';
+  sizes?: string;
+  alt?: string;
+  class?: string;
+}
+
+const {
+  href = '/teiv2/',
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  decoding = 'async',
+  sizes = '(max-width: 768px) 60px, (max-width: 1024px) 72px, 88px',
+  alt = 'TEI Electrical Logo',
+  class: className = '',
+} = Astro.props;
+
+const imageProps = {
+  src: logoUrl,
+  alt,
+  loading,
+  fetchpriority,
+  decoding,  widths: [225, 450],
+  sizes: '225px',  quality: 10,
+};
+---
+
+{
+  href ? (
+    <a href={href} class={`logo ${className}`.trim()}>
+      <Image {...imageProps} />
+    </a>
+  ) : (
+    <Image {...(imageProps as any)} />
+  )
+}
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    border-radius: 12px;
+    height: 60px;
+  }
+
+  .logo img {
+    height: 100%;
+    width: auto;
+    display: block;
+    transition: height 0.3s ease;
+    image-rendering: crisp-edges;
+  }
+
+  @media (min-width: 768px) {
+    .logo {
+      height: 72px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .logo {
+      height: 88px;
+    }
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+  }
+
+  .logo:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 8px;
+  }
+</style>

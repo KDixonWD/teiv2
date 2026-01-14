@@ -1,5 +1,6 @@
 ---
-import logoUrl from '../../../assets/global/TEI_logo.png';
+import { Image } from 'astro:assets';
+import Logo from '../../Logo.astro';
 import yellLogoUrl from '../../../assets/global/Yell-Reviews-Logo.png';
 
 import CloseIcon from '../../../assets/icons/close.svg';
@@ -17,7 +18,7 @@ import InstagramIcon from '../../../assets/icons/instagram.svg';
   <div class="full-divider" aria-hidden="true"></div>
 
   <div class="nav-header">
-    <img src={logoUrl.src} alt="TEI Electrical Logo" class="mobile-logo" />
+    <Logo loading="lazy" class="mobile-logo" />
 
     <button class="close-btn" id="closeMenu" aria-label="Close menu">
       <CloseIcon class="icon icon--lg" />
