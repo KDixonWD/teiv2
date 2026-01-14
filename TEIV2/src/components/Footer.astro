@@ -299,16 +299,14 @@ const currentYear = new Date().getFullYear();
   .brand-bar-inner {
     position: relative;
     z-index: 1;
-    width: auto;
-    padding: 2.25rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.25rem 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.65rem;
     align-items: center;
     text-align: center;
-    margin-left: 26%;
-    margin-right: 26%;
-    
   }
 
   @media (min-width: 820px) {
@@ -316,8 +314,7 @@ const currentYear = new Date().getFullYear();
       flex-direction: row;
       justify-content: space-between;
       text-align: left;
-      padding: 2.4rem 0;
-      
+      padding: 2.4rem 1rem;
     }
   }
 
