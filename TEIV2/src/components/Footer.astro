@@ -7,6 +7,13 @@ import yellLogoUrl from '../assets/global/Yell-Reviews-Logo.png';
 /* Footer brand bar background */
 import slide1 from '../assets/hero-carousel/slide1.jpg';
 
+/* Certification logos */
+import napitLogo from '../assets/certifications/Napit.jpg';
+import mcsLogo from '../assets/certifications/Mcs.jpg';
+import trustmarkLogo from '../assets/certifications/Trustmark.png';
+import reccLogo from '../assets/certifications/Recc.png';
+import cityLogo from '../assets/certifications/City.png';
+
 import LocationIcon from '../assets/icons/location.svg';
 import PhoneIcon from '../assets/icons/phone.svg';
 import EmailIcon from '../assets/icons/email.svg';
@@ -152,11 +159,11 @@ const currentYear = new Date().getFullYear();
           </div>
           
           <div class="cert-grid">
-            <img src="/teiv2/images/certifications/Napit.jpg" alt="NAPIT Approved" class="cert-logo" />
-            <img src="/teiv2/images/certifications/Mcs.jpg" alt="MCS Certified" class="cert-logo" />
-            <img src="/teiv2/images/certifications/Trustmark.png" alt="TrustMark" class="cert-logo" />
-            <img src="/teiv2/images/certifications/Recc.png" alt="RECC Member" class="cert-logo" />
-            <img src="/teiv2/images/certifications/City.png" alt="City & Guilds" class="cert-logo" />
+            <Image src={napitLogo} alt="NAPIT Approved" class="cert-logo cert-logo--featured" widths={[150, 300]} sizes="150px" loading="lazy" decoding="async" />
+            <Image src={mcsLogo} alt="MCS Certified" class="cert-logo" widths={[150, 300]} sizes="150px" loading="lazy" decoding="async" />
+            <Image src={trustmarkLogo} alt="TrustMark" class="cert-logo" widths={[150, 300]} sizes="150px" loading="lazy" decoding="async" />
+            <Image src={reccLogo} alt="RECC Member" class="cert-logo" widths={[150, 300]} sizes="150px" loading="lazy" decoding="async" />
+            <Image src={cityLogo} alt="City & Guilds" class="cert-logo" widths={[150, 300]} sizes="150px" loading="lazy" decoding="async" />
           </div>
         </div>
 
@@ -689,6 +696,12 @@ const currentYear = new Date().getFullYear();
     border: 2px solid rgba(255, 255, 255, 0.15);
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .cert-logo--featured {
+    grid-row: span 2;
+    height: auto;
+    max-height: 140px;
   }
 
   .cert-logo:hover {
