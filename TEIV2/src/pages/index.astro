@@ -4,12 +4,17 @@ import Hero from '../components/Hero.astro';
 import ContactForm from '../components/ContactForm.astro';
 import ServiceOverview from '../components/ServiceOverview.astro';
 import QuoteBar from '../components/QuoteBar.astro';
+import FAQSection from '../components/FAQSection.astro';
+import PortfolioCarousel from '../components/PortfolioCarousel.astro';
 ---
 <BaseLayout title="Home">
-  <Hero title="TEI Electrical" subtitle="Trusted electricians for domestic and commercial customers." />
+  <Hero/>
 
   <ServiceOverview />
   <QuoteBar />
 
+    <FAQSection />
+
+  <PortfolioCarousel />
 
 </BaseLayout>

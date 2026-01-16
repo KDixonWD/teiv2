@@ -7,6 +7,12 @@ import slide1 from '../assets/hero-carousel/slide1.jpg';
 import slide2 from '../assets/hero-carousel/slide2.jpg';
 import slide3 from '../assets/hero-carousel/slide3.jpg';
 
+interface Props {
+  separator?: 'none' | 'curve-up' | 'curve-down';
+}
+
+const { separator = 'none' } = Astro.props as Props;
+
 const slides = [
   {
     image: slide1,
@@ -35,7 +41,7 @@ const slides = [
 ];
 ---
 
-<Section lightningPathcolour="fff">
+<Section>
   <div class="carousel-container">
     <div class="hero-swiper swiper">
       <div class="swiper-wrapper">
@@ -71,12 +77,14 @@ const slides = [
 </Section>
 
 <style>
+
   .carousel-container {
     position: relative;
     width: 100%;
     height: calc(100vh - 60px);
     max-height: 520px;
     overflow: hidden;
+    border-bottom: 4px solid var(--brand-yellow);
   }
 
   .hero-swiper {

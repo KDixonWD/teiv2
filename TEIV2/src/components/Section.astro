@@ -1,76 +1,97 @@
 ---
-// Import SVG as a URL so Vite serves it from the dev server
-import lightningBorder from '../assets/global/lightning-border.svg?url';
 interface Props {
   class?: string;
   theme?: 'light' | 'dark';
-  lightningPathcolour?: string;
+  separator?: 'none' | 'curve-up' | 'curve-down';
+  separatorTop?: 'none' | 'curve-up' | 'curve-down';
 }
-const { class: className, theme = 'light', lightningPathcolour } = Astro.props as Props;
-
+const { class: className, theme = 'light', separator = 'none', separatorTop = 'none' } = Astro.props as Props;
 ---
 
-<div class={`section-wrapper ${theme} ${className ?? ''}`}>
+<div class={`section-wrapper ${theme} ${separator} ${className ?? ''}`}>
+  {separatorTop === 'curve-up' && (
+    <svg class="separator-svg separator-top curve-up" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <path d="M0 100 C 20 0 50 0 100 100 Z" />
+    </svg>
+  )}
+  
+  {separatorTop === 'curve-down' && (
+    <svg class="separator-svg separator-top curve-down" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <path d="M0 0 C 50 100 80 100 100 0 Z" />
+    </svg>
+  )}
+  
   <div class="section-content">
     <slot />
   </div>
-  <svg
-    class="lightning-path"
-    viewBox="0 0 1280 100"
-    preserveAspectRatio="none"
-    {...(lightningPathcolour ? { style: `color: ${lightningPathcolour};` } : {})}
-  >
-    <path
-      fill="currentColor"
-      d="M 1279.9531 11.199219 L 1160.6777 4 L 1177.7578 26 L 733.72461 4 L 750.79688 26 L 306.76367 4 L 323.8457 26 L 0.26757812 8.8339844 L 0.26757812 51.164062 L 1279.9531 51.164062 L 1279.9531 11.199219 z "
-    />
-  </svg>
-  <img src={lightningBorder} class="lightning-border" alt="" />
+  
+  {separator === 'curve-up' && (
+    <svg class="separator-svg curve-up" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <path d="M0 100 C 20 0 50 0 100 100 Z" />
+    </svg>
+  )}
+  
+  {separator === 'curve-down' && (
+    <svg class="separator-svg curve-down" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <path d="M0 0 C 50 100 80 100 100 0 Z" />
+    </svg>
+  )}
 </div>
 
 <style>
   .section-wrapper {
-    position: relative;
-    overflow: hidden;
+    overflow: visible;
     padding-bottom: 0;
+    position: relative;
   }
+
+  .section-wrapper.none {
+    box-shadow: 0 4px 12px rgba(253, 238, 33, 0.25);
+  }
+
   .light {
     background-color: var(--color-bg);
   }
+
   .dark {
     background-color: var(--brand-dark);
   }
-  .section-content {
-    padding-bottom: 1rem;
-    position: relative;
-    z-index: 1;
-  }
 
-  .lightning-path {
-    position: absolute;
-    left: 0;
-    bottom: 0;
+
+  .separator-svg {
+    display: block;
     width: 100%;
-    height: 100px;
+    height: 50px;
     pointer-events: none;
-    z-index: 1;
-    color: var(--brand-dark);
-    margin-bottom: -50px;
   }
 
-  .dark .lightning-path {
-    color: var(--color-bg);
+  .separator-svg.separator-top {
+    margin-bottom: -1px;
   }
 
-  .lightning-border {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    pointer-events: none;
-    z-index: 2;
-    margin-bottom: -50px;
+  /* Dark theme with separator-top gets white background */
+  .dark .separator-svg.separator-top {
+    background-color: #ffffff;
   }
- 
+
+  .separator-svg path {
+    stroke: none;
+  }
+
+  /* Curve styling - fill adapts based on theme */
+  .light.curve-up path,
+  .light.curve-down path {
+    fill: var(--color-bg);
+  }
+
+  .dark.curve-up path,
+  .dark.curve-down path {
+    fill: var(--brand-dark);
+  }
+
+  @media (min-width: 768px) {
+    .separator-svg {
+      height: 100px;
+    }
+  }
 </style>

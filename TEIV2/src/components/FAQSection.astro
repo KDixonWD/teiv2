@@ -1,0 +1,409 @@
+---
+// FAQSection.astro – Professional two-column layout with FAQ and images
+// Usage: <FAQSection />
+import SectionHeader from './SectionHeader.astro';
+import Section from './Section.astro';
+import { Image } from 'astro:assets';
+
+// Import certification logos
+import napitLogo from '../assets/certifications/Napit.jpg';
+import mcsLogo from '../assets/certifications/Mcs.jpg';
+import trustmarkLogo from '../assets/certifications/Trustmark.png';
+import reccLogo from '../assets/certifications/Recc.png';
+import cityLogo from '../assets/certifications/City.png';
+
+// Import FAQ section images
+import solarImg from '../assets/FAQSection/Solar.png';
+import installationImg from '../assets/FAQSection/Installation.png';
+
+
+const faqs = [
+  {
+    question: "What areas do you cover?",
+    answer:
+      "We provide electrical services throughout North Yorkshire, including Filey, Hunmanby, Scarborough, Whitby, Bridlington and surrounding areas. As a locally based company, we are able to respond quickly and offer reliable service to both residential and commercial customers.",
+  },
+  {
+    question: "Are you fully qualified, insured and accredited?",
+    answer:
+      "Yes. THEM Electrical Installations Ltd are fully qualified and insured electricians. We are registered with recognised industry bodies including NAPIT and work strictly to the latest UK wiring regulations (BS 7671). All work is carried out safely, professionally, and to a high standard.",
+  },
+  {
+    question: "How much do your electrical services cost?",
+    answer:
+      "Our pricing is transparent and competitive, with clear quotations provided before any work begins. We do not believe in hidden charges. Costs depend on the type and scale of work required, and we are always happy to discuss options to suit your budget.",
+  },
+  {
+    question: "Do you offer emergency electrical call-outs?",
+    answer:
+      "Yes, we offer emergency electrical call-outs for urgent situations such as power loss, tripping circuits, burning smells, or unsafe installations. If you believe there is an immediate safety risk, we recommend contacting us as soon as possible.",
+  },
+  {
+    question: "Do you carry out domestic and commercial electrical work?",
+    answer:
+      "We undertake a wide range of domestic and commercial electrical services. This includes full and partial rewires, consumer unit upgrades, EV charger installations, solar PV systems, fault finding, ongoing maintenance, and electrical testing and certification.",
+  },
+  {
+    question: "Why should I choose THEM Electrical Installations Ltd?",
+    answer:
+      "We are a local, customer-focused electrical contractor with a strong reputation for reliability and quality workmanship. With years of hands-on experience, professional accreditation, and a right-first-time approach, we deliver electrical solutions you can trust.",
+  },
+  {
+    question: "Is your electrical work guaranteed?",
+    answer:
+      "Yes. All our electrical work is carried out to current regulations and is backed by appropriate certification and guarantees where applicable. We take pride in our workmanship and aim to provide long-term, safe solutions rather than quick fixes.",
+  }
+];
+---
+
+<Section theme="light">
+  <div class="faq-section">
+    <SectionHeader theme="light" title="Frequently Asked Questions" />
+    <p class="faq-subtitle">
+      Find answers to common questions about our electrical services, qualifications, coverage and pricing.
+    </p>
+
+    <div class="faq-grid">
+        <div class="faq-list">
+          {faqs.map((faq) => (
+            <details class="faq-item">
+              <summary class="faq-question">
+                <span class="faq-icon">+</span>
+                <h3>{faq.question}</h3>
+              </summary>
+              <div class="faq-answer">{faq.answer}</div>
+            </details>
+          ))}
+        </div>
+
+        <div class="faq-imagery">
+          <div class="image-gallery">
+            <div class="gallery-item gallery-main">
+              <div class="image-wrapper">
+                <Image src={installationImg} alt="Professional Electrical Installation" loading="lazy" />
+              </div>
+              <div class="image-label">Professional Installation</div>
+            </div>
+
+            <div class="gallery-item gallery-side-top">
+              <div class="certifications-grid">
+                <div class="cert-item">
+                  <Image src={napitLogo} alt="NAPIT Approved" loading="lazy" />
+                </div>
+                <div class="cert-item">
+                  <Image src={trustmarkLogo} alt="TrustMark" loading="lazy" />
+                </div>
+                <div class="cert-item">
+                  <Image src={mcsLogo} alt="MCS Certified" loading="lazy" />
+                </div>
+                <div class="cert-item">
+                  <Image src={reccLogo} alt="RECC Approved" loading="lazy" />
+                </div>
+                <div class="cert-item">
+                  <Image src={cityLogo} alt="City & Guilds" loading="lazy" />
+                </div>
+              </div>
+              <div class="image-label">Fully Accredited & Certified</div>
+            </div>
+
+            <div class="gallery-item gallery-side-bottom">
+              <div class="image-wrapper">
+                <Image src={solarImg} alt="Expert Solar Installation" loading="lazy" />
+              </div>
+              <div class="image-label">Expert Solar Installer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</Section>
+
+<style>
+.faq-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.faq-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  color: rgba(0, 0, 0, 0.65);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-item {
+  background: linear-gradient(135deg, rgba(46,46,46,0.97) 0%, rgba(38,38,38,0.97) 100%);
+  border: 1px solid rgba(96,96,97,0.4);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  border-color: rgba(253,238,33,0.3);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  color: #fff;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.faq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--color-accent);
+  color: var(--brand-black);
+  border-radius: 50%;
+  font-weight: 900;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-item h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: inherit;
+}
+
+.faq-answer {
+  padding: 0 1.5rem 1.25rem 3.5rem;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.faq-imagery {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  sticky: top 100px;
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+  min-height: 400px;
+}
+
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  background: white;
+}
+
+.gallery-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-main {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+.gallery-side-top {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.gallery-side-bottom {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.placeholder-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(46, 46, 46, 0.02) 0%, rgba(253, 238, 33, 0.02) 100%);
+  border: 1px solid rgba(96, 96, 97, 0.15);
+}
+
+.placeholder-image svg {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.75rem;
+  padding: 1rem;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(46, 46, 46, 0.02) 0%, rgba(253, 238, 33, 0.02) 100%);
+  padding-bottom: 4.5rem;
+}
+
+.certifications-grid .cert-item:last-child {
+  grid-column: 1 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.cert-item {
+  background: white;
+  border-radius: 8px;
+  padding: 0.75rem;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.cert-item:hover {
+  transform: scale(1.05);
+}
+
+.cert-item img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 80px;
+}
+
+.image-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(42, 145, 52, 0.85) 50%, rgba(42, 145, 52, 0.95) 100%);
+  color: white;
+  padding: 1.25rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 1024px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .faq-imagery {
+    sticky: unset;
+  }
+
+  .image-gallery {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, 200px);
+    min-height: auto;
+  }
+
+  .gallery-main {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+  }
+
+  .gallery-side-top {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+
+  .gallery-side-bottom {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .image-gallery {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, 250px) auto;
+    min-height: auto;
+    gap: 1rem;
+  }
+
+  .gallery-main {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    height: auto;
+  }
+
+  .gallery-side-top {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    height: auto;
+  }
+
+  .gallery-side-bottom {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+    height: 200px;
+  }
+
+  .image-label {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+  }
+}
+</style>
